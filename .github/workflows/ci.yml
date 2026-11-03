@@ -1,0 +1,27 @@
+name: CI
+
+# Runs on every push and pull request: installs, lints and builds the site.
+# A red X on GitHub means the site would not build, so don't deploy it.
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - name: Warn about oversized media
+        run: |
+          big=$(find public -type f -size +5M -printf '%s %p\n' | sort -rn)
+          if [ -n "$big" ]; then
+            echo "::warning::Files over 5 MB in public/ (run npm run optimize:images):"
+            echo "$big" | awk '{printf "  %.1f MB  %s\n", $1/1048576, $2}'
+          fi

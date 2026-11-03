@@ -1,0 +1,160 @@
+/* --- Concept cards (Happeninki / RYYM) --- */
+.landing-cards {
+    margin-top: 10rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 5vw 4rem;
+    box-sizing: border-box;
+  }
+  
+  .concept-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+  }
+  
+  .concept-card-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .concept-card--happeninki .concept-card-bg {
+    background-image: url('/img/overlay1.jpg');
+  }
+  
+  .concept-card--ryym .concept-card-bg {
+    background-image: url('/img/overlay2.jpg');
+  }
+  
+  .concept-card--happeninki::after,
+  .concept-card--ryym::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0.5;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+  
+  .concept-card--happeninki::after {
+    background: linear-gradient(145deg, rgba(139, 92, 246, 0.25) 0%, rgba(30, 20, 50, 0.95) 100%);
+  }
+  
+  .concept-card--ryym::after {
+    background: linear-gradient(145deg, rgba(255, 77, 77, 0.2) 0%, rgba(50, 20, 20, 0.95) 100%);
+  }
+  
+  .concept-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: transparent;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease, background 0.3s ease;
+    z-index: 0.6;
+  }
+  
+  .concept-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  }
+  
+  .concept-card--happeninki {
+    border: 1px solid rgba(139, 92, 246, 0.4);
+  }
+  
+  .concept-card--happeninki:hover {
+    box-shadow: 0 20px 50px rgba(139, 92, 246, 0.35);
+  }
+  
+  .concept-card--happeninki:hover::before {
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(167, 139, 250, 0.4));
+  }
+  
+  .concept-card--ryym {
+    border: 1px solid rgba(255, 77, 77, 0.4);
+  }
+  
+  .concept-card--ryym:hover {
+    box-shadow: 0 20px 50px rgba(255, 77, 77, 0.3);
+  }
+  
+  .concept-card--ryym:hover::before {
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(255, 77, 77, 0.8), rgba(255, 120, 120, 0.4));
+  }
+  
+  .concept-card-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2.5rem;
+  }
+  
+  .concept-card-title {
+    font-family: 'HelveticaBlack', Montserrat;
+    font-size: clamp(3vw, 4vw, 2.5rem);
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.3s ease;
+  }
+  
+  .concept-card:hover .concept-card-title {
+    transform: scale(1.05);
+  }
+  
+  .concept-card--happeninki .concept-card-title {
+    color: #c4b5fd;
+  }
+  
+  .concept-card--ryym .concept-card-title {
+    color: #fca5a5;
+  }
+  
+  .concept-card-sub {
+    font-size: 0.75rem;
+    font-style: regular;
+    font-family: Montserrat;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: transform 0.3s ease;
+  }
+  
+  .concept-card:hover .concept-card-sub {
+    transform: translateY(2px);
+  }
+  
+  @media (max-width: 768px) {
+    .landing-cards {
+      grid-template-columns: 1fr;
+      padding: 0 1rem 3rem;
+      gap: 1.5rem;
+    }
+  
+    .concept-card {
+      min-height: 220px;
+    }
+  }
