@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useI18n } from '../i18n'
 import { SOCIALS, CONTACT_EMAIL } from '../data/site'
+import { BRANDS } from '../data/brands'
 
 function Footer() {
   const { t, paths } = useI18n()
@@ -9,7 +10,10 @@ function Footer() {
     <footer className="footer">
       <div className="wrap footer-grid">
         <div>
-          <p className="display footer-word" aria-hidden="true">Reivit.fi</p>
+          <div className="footer-logos">
+            <Link to={paths.happeninki}><img className="brand-logo brand-logo--happeninki" src={BRANDS.happeninki.logo} alt="Häppeninki" /></Link>
+            <Link to={paths.ryym}><img className="brand-logo brand-logo--ryym" src={BRANDS.ryym.logo} alt="RYYM" /></Link>
+          </div>
           <nav className="footer-links" aria-label="Footer">
             <Link to={paths.events}>{t.nav.events}</Link>
             <Link to={paths.rental}>{t.footer.rental}</Link>

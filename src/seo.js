@@ -28,16 +28,16 @@ function eventsLd(lang) {
 // Title + description per page and language
 const META = {
   home: {
-    fi: [`${SITE_NAME} | Reivit Tampereella`, 'Häppeninki ja RYYM: hard groove-, hard bounce-, schranz- ja industrial techno -reivejä Tampereella. Tapahtumat, galleria, residentit ja kalustovuokraus.'],
-    en: [`${SITE_NAME} | Raves in Tampere`, 'Häppeninki and RYYM: hard groove, hard bounce, schranz and industrial techno raves in Tampere. Events, gallery, residents and event equipment rental.'],
+    fi: [`${SITE_NAME} | Reivit Tampereella`, 'Häppeninki ja RYYM: house-, techno-, hard techno- ja harder styles -reivejä Tampereella. Tapahtumat, galleria, residentit ja kalustovuokraus.'],
+    en: [`${SITE_NAME} | Raves in Tampere`, 'Häppeninki and RYYM: house, techno, hard techno and harder styles raves in Tampere. Events, gallery, residents and event equipment rental.'],
   },
   happeninki: {
-    fi: ['Häppeninki | Hard groove- ja hard bounce -reivit Tampereella', 'Häppeninki on hard bounce-, hard groove- ja hypnotic techno -konsepti Tampereella: 360-setupit ja kansainväliset vieraat.'],
-    en: ['Häppeninki | Hard groove & hard bounce raves in Tampere', 'Häppeninki is a hard bounce, hard groove and hypnotic techno concept in Tampere with 360 setups and international guests.'],
+    fi: ['Häppeninki | House- ja techno-reivit Tampereella', 'Häppeninki on house- ja techno-konsepti Tampereella: 360-setupit ja kansainväliset vieraat.'],
+    en: ['Häppeninki | House & techno raves in Tampere', 'Häppeninki is a house and techno concept in Tampere with 360 setups and international guests.'],
   },
   ryym: {
-    fi: ['RYYM | Industrial, schranz ja raw techno Tampereella', 'RYYM on industrial-, schranz- ja raw techno -reivikonsepti Tampereella. Teemaillat, armottomat kickit ja varastotunnelma.'],
-    en: ['RYYM | Industrial, schranz & raw techno in Tampere', 'RYYM is an industrial, schranz and raw techno rave concept in Tampere. Themed nights, relentless kicks and warehouse energy.'],
+    fi: ['RYYM | Hard techno ja harder styles Tampereella', 'RYYM on hard techno- ja harder styles -reivikonsepti Tampereella. Teemaillat, armottomat kickit ja varastotunnelma.'],
+    en: ['RYYM | Hard techno & harder styles in Tampere', 'RYYM is a hard techno and harder styles rave concept in Tampere. Themed nights, relentless kicks and warehouse energy.'],
   },
   events: {
     fi: [`Tapahtumat | ${SITE_NAME}`, 'Tulevat ja menneet Häppeninki- ja RYYM-reivit Tampereella: päivämäärät, lineupit ja liput.'],

@@ -1,12 +1,13 @@
 import { HeroVideo, Ticker, Duo } from '../components/ui'
 import { EventsBoard } from './Events'
 import { useI18n } from '../i18n'
+import { BRANDS } from '../data/brands'
 
 const CONCEPTS = {
   happeninki: {
     name: 'Häppeninki',
     ink: 'violet',
-    ticker: ['Hard groove', 'Hard bounce', 'Hypnotic techno', '360 setups', 'Safer space', 'Tampere'],
+    ticker: ['House', 'Techno', '360 setups', 'Safer space', 'Tampere'],
     artists: [
       { name: 'Beau Didier', from: 'NL', genre: 'Hypnotic techno / Hard groove', img: '/img/artists/beau.jpg' },
       { name: 'Hujus', from: 'NL', genre: 'Hypnotic techno / Hard groove', img: '/img/artists/hujus.jpg' },
@@ -16,7 +17,7 @@ const CONCEPTS = {
   ryym: {
     name: 'RYYM',
     ink: 'red',
-    ticker: ['Industrial', 'Schranz', 'Raw techno', 'Themed nights', 'Safer space', 'Tampere'],
+    ticker: ['Hard techno', 'Harder styles', 'Themed nights', 'Safer space', 'Tampere'],
     artists: [
       { name: 'Schellt', from: 'UA', genre: 'Schranz', img: '/img/artists/schellt.jpg', pos: 'center 30%' },
       { name: 'Axiver', from: 'ITA', genre: 'Neo Rave', img: '/img/artists/axiver.jpg', pos: 'center 30%' },
@@ -33,7 +34,7 @@ export default function Concept({ concept }) {
       <section className="hero">
         <HeroVideo />
         <div className="wrap hero-inner">
-          <h1 className="display hero-word"><span className="stretch">{c.name}</span></h1>
+          <h1 className="hero-word"><img className={`brand-logo brand-logo--${concept}`} src={BRANDS[concept].logo} alt={c.name} /></h1>
           <p className="lede">{t[concept].intro}</p>
         </div>
       </section>

@@ -615,3 +615,23 @@ a.ticket-buy:hover { background: var(--ticket-ink, var(--black)); color: var(--t
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .ticker-track { flex-wrap: wrap; white-space: normal; }
 }
+
+/* ---------- Brand logos (blackletter SVGs in public/img/logo) ---------- */
+.brand-logo { display: block; height: auto; max-width: 100%; }
+.split-name { margin-bottom: 0.6em; line-height: 0; }
+.split-name .brand-logo--happeninki { width: min(100%, 560px); }
+.split-name .brand-logo--ryym { width: min(70%, 360px); }
+.hero-word { line-height: 0; margin-bottom: clamp(24px, 4vw, 48px); }
+.hero-word .brand-logo--happeninki { width: min(100%, 1000px); }
+.hero-word .brand-logo--ryym { width: min(72%, 640px); }
+.footer-logos { display: flex; align-items: center; gap: 28px; }
+.footer-logos .brand-logo--happeninki { width: 200px; }
+.footer-logos .brand-logo--ryym { width: 118px; }
+.footer-logos a { opacity: 0.55; transition: opacity 0.2s; }
+.footer-logos a:hover { opacity: 1; }
+@media (max-width: 760px) {
+  .split-name .brand-logo--happeninki { width: min(100%, 420px); }
+  .split-name .brand-logo--ryym { width: min(60%, 260px); }
+  .footer-logos .brand-logo--happeninki { width: 150px; }
+  .footer-logos .brand-logo--ryym { width: 90px; }
+}

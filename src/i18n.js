@@ -23,16 +23,16 @@ export const T = {
       nextEvent: 'Seuraava tapahtuma',
     },
     cards: {
-      happeninki: 'Hard bounce-, hard groove- ja hypnotic techno -konseptimme',
-      ryym: 'Industrial-, schranz- ja raw techno -konseptimme',
+      happeninki: 'House- ja techno-konseptimme',
+      ryym: 'Hard techno- ja harder styles -konseptimme',
       goTo: 'Siirry sivulle',
     },
     rentalTeaser: { text: 'Tarvitsetko äänentoistoa, DJ-laitteita tai valoja omaan tapahtumaasi?', button: 'Kalustovuokraus' },
     happeninki: {
-      intro: 'Häppeninki on hard bounce-, hard groove- ja hypnotic techno -konseptimme Tampereella. Isot 360-setupit, rullaavat bassolinjat ja yleisö, joka pysyy valojen syttymiseen asti. Tuomme kansainvälisiä vieraita paikallisten artistien rinnalle ja pidämme tanssilattian turvallisempana tilana kaikille, jotka tulevat tanssimaan.',
+      intro: 'Häppeninki on house- ja techno-konseptimme Tampereella. Isot 360-setupit, rullaavat bassolinjat ja yleisö, joka pysyy valojen syttymiseen asti. Tuomme kansainvälisiä vieraita paikallisten artistien rinnalle ja pidämme tanssilattian turvallisempana tilana kaikille, jotka tulevat tanssimaan.',
     },
     ryym: {
-      intro: 'RYYM on pimeämpi puoli: industrialia, schranzia ja raw technoa täydellä paineella. Luvassa armottomia kickejä, varastotunnelmaa ja alusta asti rakennettuja teemailtoja joutomaareiveistä teräshäkkeihin. Kovaa, nopeaa ja tehty niille, jotka tulivat liikkumaan.',
+      intro: 'RYYM on kovempi puoli: hard technoa ja harder styles -musiikkia täydellä paineella. Luvassa armottomia kickejä, varastotunnelmaa ja alusta asti rakennettuja teemailtoja joutomaareiveistä teräshäkkeihin. Kovaa, nopeaa ja tehty niille, jotka tulivat liikkumaan.',
     },
     showcased: 'Aiemmin esiintyneet',
     showcasedAria: 'Aiemmin esiintyneet artistit',
@@ -116,7 +116,7 @@ export const T = {
       next: 'Seuraava kuva',
       rights: 'Kaikki oikeudet pidätetään.',
     },
-    ticker: ['Hard groove', 'Hard bounce', 'Schranz', 'Industrial', 'Hypnotic', 'Safer space', 'Tampere'],
+    ticker: ['House', 'Techno', 'Hard techno', 'Harder styles', 'Safer space', 'Tampere'],
   },
 
   en: {
@@ -127,16 +127,16 @@ export const T = {
       nextEvent: 'Next event',
     },
     cards: {
-      happeninki: 'Our hard bounce, hard groove, and hypnotic techno concept',
-      ryym: 'Our industrial, schranz, and raw techno concept',
+      happeninki: 'Our house and techno concept',
+      ryym: 'Our hard techno and harder styles concept',
       goTo: 'Go to',
     },
     rentalTeaser: { text: 'Need sound, DJ gear or lights for your own event?', button: 'Equipment rental' },
     happeninki: {
-      intro: 'Häppeninki is our hard bounce, hard groove and hypnotic techno concept in Tampere. Big 360 setups, rolling basslines and a crowd that stays until the lights come on. We bring international guests next to local talent and keep the floor a safer space for everyone who comes to dance.',
+      intro: 'Häppeninki is our house and techno concept in Tampere. Big 360 setups, rolling basslines and a crowd that stays until the lights come on. We bring international guests next to local talent and keep the floor a safer space for everyone who comes to dance.',
     },
     ryym: {
-      intro: 'RYYM is the darker side: industrial, schranz and raw techno at full pressure. Expect relentless kicks, warehouse energy and themed nights built from the ground up, from wasteland raves to steel cages. Loud, fast and made for people who came to move.',
+      intro: 'RYYM is the harder side: hard techno and harder styles at full pressure. Expect relentless kicks, warehouse energy and themed nights built from the ground up, from wasteland raves to steel cages. Loud, fast and made for people who came to move.',
     },
     showcased: 'Previously showcased',
     showcasedAria: 'Previously showcased artists',
@@ -220,6 +220,6 @@ export const T = {
       next: 'Next photo',
       rights: 'All rights reserved.',
     },
-    ticker: ['Hard groove', 'Hard bounce', 'Schranz', 'Industrial', 'Hypnotic', 'Safer space', 'Tampere'],
+    ticker: ['House', 'Techno', 'Hard techno', 'Harder styles', 'Safer space', 'Tampere'],
   },
 }
