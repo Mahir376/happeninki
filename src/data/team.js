@@ -7,5 +7,5 @@ export const TEAM = [
   { id: 'riku', name: 'Riku', role: 'dj', image: '/img/residents/r2.jpg', detail: 'Hardgroove / Hypnotic', ink: 'violet', link: '' },
   { id: 'tiskimikko', name: 'Tiskimikko', role: 'dj', image: '/img/residents/r3.jpg', detail: 'Hard Techno / Schranz', ink: 'red', link: '' },
   // Photos and portfolio link coming from Chris
-  { id: 'chris', name: 'Chris', role: 'video', image: '', detail: '', ink: 'violet', link: '' },
+  { id: 'chris', name: 'Chris', role: 'video', image: '/img/team/chris.jpg', detail: '', ink: 'violet', link: '' },
 ]
