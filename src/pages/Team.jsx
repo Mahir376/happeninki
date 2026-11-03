@@ -1,4 +1,4 @@
-import { PageHead } from '../components/ui'
+import { Duo } from '../components/ui'
 import { useI18n } from '../i18n'
 import { TEAM } from '../data/team'
 
@@ -6,23 +6,29 @@ export default function Team() {
   const { t } = useI18n()
   return (
     <>
-      <PageHead title={t.residents.title} lead={t.residents.intro} />
+      <div className="wrap page-head">
+        <h1 className="display"><span className="stretch">{t.residents.title}</span></h1>
+        <p className="lede">{t.residents.intro}</p>
+      </div>
       <section className="wrap section" style={{ paddingTop: 0 }} aria-label={t.residents.title}>
-        <ul className="people">
+        <div className="team-grid">
           {TEAM.map((m) => (
-            <li key={m.id} className="person">
+            <article key={m.id} className={`member theme-${m.ink === 'red' ? 'ryym' : 'happeninki'}`}>
               {m.image ? (
-                <div className="person-photo"><img src={m.image} alt={m.name} loading="lazy" decoding="async" /></div>
+                <Duo src={m.image} alt={m.name} />
               ) : (
-                <div className="person-photo person-photo--empty">{t.ui.photosSoon}</div>
+                <div className="member-blank" aria-hidden="true">
+                  <b>{m.name[0]}</b>
+                  <span>{t.ui.photosSoon}</span>
+                </div>
               )}
-              <h2 className="person-name">{m.name}</h2>
-              <p className="person-role">{t.ui.roles[m.role]}</p>
-              {m.detail && <p className="person-detail">{m.detail}</p>}
-              {m.link && <a className="person-link" href={m.link} target="_blank" rel="noreferrer">{t.ui.portfolio}</a>}
-            </li>
+              <h2 className="member-name">{m.name}</h2>
+              <p className="member-role">{t.ui.roles[m.role]}</p>
+              {m.detail && <p className="member-detail">{m.detail}</p>}
+              {m.link && <a className="member-link" href={m.link} target="_blank" rel="noreferrer">{t.ui.portfolio}</a>}
+            </article>
           ))}
-        </ul>
+        </div>
       </section>
     </>
   )

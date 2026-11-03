@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
 import Navbar from './components/navbar'
-import { PageHead } from './components/ui'
 
 import Landing from './pages/Landing'
 import Concept from './pages/Concept'
@@ -40,9 +39,11 @@ function RouteEffects() {
 function NotFound() {
   const { t, paths } = useI18n()
   return (
-    <PageHead title="404" lead={t.notFound.text}>
+    <div className="wrap page-head">
+      <h1 className="display"><span className="stretch">404</span></h1>
+      <p className="lede">{t.notFound.text}</p>
       <p style={{ marginTop: 28 }}><Link to={paths.home} className="btn">{t.notFound.back}</Link></p>
-    </PageHead>
+    </div>
   )
 }
 
@@ -55,12 +56,14 @@ function Layout({ children }) {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+  const theme = routeKey === 'happeninki' || routeKey === 'ryym' ? `theme-${routeKey}` : 'theme-landing'
   return (
-    <div className={`page-${routeKey ?? 'notfound'}`}>
+    <div className={theme}>
       <a className="skip-link" href="#main">{t.ui.skip}</a>
       <Navbar solid={scrolled} />
       <main id="main">{children}</main>
       <Footer />
+      <div className="grain" aria-hidden="true" />
     </div>
   )
 }

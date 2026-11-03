@@ -11,19 +11,9 @@ npm run dev        # http://localhost:5173
 
 ## Design
 
-Black, bone (`#E9E5DD`) and a thread of antique gold (`#B9A57D`, only for ticket buttons and the
-active menu item). The Häppeninki and RYYM blackletter logos (`public/img/logo/*.svg`, traced from
-the originals in `media/logo`) carry the character; everything else is Archivo (free, self-hosted).
-Photos and video are shown in their own colours. Page titles shrink to fit their longest word, so long
-Finnish words never overflow. All styles are in `src/styles/theme.css`.
-
-## Tests
-
-- `npm test` checks event logic: Finnish time zone and summer time, dates in both languages,
-  past/upcoming, and the New event form parsing. Runs on every push.
-- `npm run check:site` (with `npm run preview` running) opens all 18 pages at 320 to 1440 px and
-  reports text in the wrong language, wrong lang/canonical/hreflang tags, content wider than the
-  screen or touching its edge, broken images and console errors. Needs Playwright.
+Two inks on black: Häppeninki violet `#7A3CFF` and RYYM red `#FF2A1A`; photos and video are
+tinted in the ink of the page. Events sit on a light concrete board. Fonts are Anton and Archivo
+(free, self-hosted via npm, no Google Fonts requests). All styles are in `src/styles/theme.css`.
 
 ## Languages
 

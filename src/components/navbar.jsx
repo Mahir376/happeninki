@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useI18n, alternatePath, LANGS } from '../i18n'
 
-const NAV_KEYS = ['events', 'happeninki', 'ryym', 'gallery', 'residents', 'rental', 'contact']
-const LABEL = { happeninki: 'Häppeninki', ryym: 'RYYM' }
+const NAV_KEYS = ['events', 'gallery', 'residents', 'services', 'rental', 'contact']
 
-// FI / EN: goes to the same page in the other language
+// FI | EN: goes to the same page in the other language
 export function LangSwitch({ onNavigate }) {
   const { lang, t, pathname } = useI18n()
   return (
@@ -45,38 +44,37 @@ function Navbar({ solid }) {
 
   const link = (k, onClick) => (
     <Link to={paths[k]} onClick={onClick} aria-current={routeKey === k ? 'page' : undefined}>
-      {LABEL[k] ?? t.nav[k]}
+      {t.nav[k]}
     </Link>
   )
 
   return (
     <header className={`nav ${solid || open ? 'nav--solid' : ''} ${open ? 'nav--open' : ''}`}>
       <Link to={paths.home} className="nav-logo" onClick={close}>REIVIT.FI</Link>
-      <nav aria-label={t.ui.mainNav}>
+
+      <nav aria-label="Main">
         <ul className="nav-links">
           {NAV_KEYS.map((k) => <li key={k}>{link(k)}</li>)}
         </ul>
       </nav>
-      <LangSwitch onNavigate={close} />
-      <button
-        type="button"
-        className="nav-burger"
-        aria-label={t.nav.menu}
-        aria-expanded={open}
-        aria-controls="nav-menu"
-        onClick={() => setOpen((v) => !v)}
-      >
-        <span /><span /><span />
-      </button>
-      <div className="nav-menu" id="nav-menu" aria-hidden={!open} inert={!open}>
+
+      <div className="nav-right">
+        <LangSwitch onNavigate={close} />
+        <button
+          type="button"
+          className="nav-burger"
+          aria-label={t.nav.menu}
+          aria-expanded={open}
+          aria-controls="nav-menu"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span /><span /><span />
+        </button>
+      </div>
+
+      <div className="nav-menu" id="nav-menu" aria-hidden={!open}>
         <ul>
-          {['home', ...NAV_KEYS].map((k) => (
-            <li key={k}>
-              {k === 'home'
-                ? <Link to={paths.home} onClick={close} aria-current={routeKey === 'home' ? 'page' : undefined}>REIVIT.FI</Link>
-                : link(k, close)}
-            </li>
-          ))}
+          {NAV_KEYS.map((k) => <li key={k}>{link(k, close)}</li>)}
         </ul>
       </div>
     </header>

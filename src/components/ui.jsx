@@ -1,24 +1,24 @@
-import { Link } from 'react-router-dom'
-import { BRANDS } from '../data/brands'
+import { useI18n } from '../i18n'
 
-export function Logo({ brand, className = '', eager = false }) {
-  const b = BRANDS[brand]
+// Photo or video tinted in the current ink (duotone).
+// ink: 'violet' | 'red' | 'both' forces a colour, otherwise the page's ink is used.
+export function Duo({ src, alt = '', ink, className = '', position, eager = false }) {
   return (
-    <img
-      src={b.logo}
-      alt={b.name}
-      className={`logo logo--${brand} ${className}`}
-      width={Math.round(b.ratio * 100)}
-      height={100}
-      loading={eager ? 'eager' : 'lazy'}
-      decoding="async"
-    />
+    <div className={`duo ${ink ? `duo--${ink}` : ''} ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        style={position ? { objectPosition: position } : undefined}
+      />
+    </div>
   )
 }
 
-export function HeroVideo() {
+export function HeroVideo({ ink }) {
   return (
-    <div className="hero-media" aria-hidden="true">
+    <div className={`duo ${ink ? `duo--${ink}` : ''}`} aria-hidden="true">
       <video autoPlay muted loop playsInline preload="metadata" poster="/video/hero-poster.jpg">
         <source src="/video/hero.webm" type="video/webm" />
         <source src="/video/hero.mp4" type="video/mp4" />
@@ -27,28 +27,15 @@ export function HeroVideo() {
   )
 }
 
-// Page title that shrinks to fit its longest word (see .title in theme.css)
-export function Title({ children, as = 'h1', className = '' }) {
-  const Tag = as
-  const longest = String(children).split(/\s+/).reduce((m, w) => Math.max(m, w.length), 0)
-  return <Tag className={`title ${className}`} style={{ '--chars': Math.max(longest, 8) }}>{children}</Tag>
-}
-
-export function PageHead({ title, lead, children }) {
+export function Ticker({ words }) {
+  const { t } = useI18n()
+  const items = words ?? t.ticker
+  const row = [...items, ...items, ...items]
   return (
-    <div className="wrap page-head">
-      <Title>{title}</Title>
-      {lead && <p className="lead">{lead}</p>}
-      {children}
-    </div>
-  )
-}
-
-export function SectionHead({ title, id, link }) {
-  return (
-    <div className="section-head">
-      <h2 id={id} className="h2">{title}</h2>
-      {link && <Link to={link.to}>{link.label}</Link>}
+    <div className="ticker" aria-hidden="true">
+      <div className="ticker-track">
+        {[...row, ...row].map((w, i) => <span key={i}>{w}</span>)}
+      </div>
     </div>
   )
 }
