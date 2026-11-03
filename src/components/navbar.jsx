@@ -50,7 +50,7 @@ function Navbar({ solid }) {
 
   return (
     <header className={`nav ${solid || open ? 'nav--solid' : ''} ${open ? 'nav--open' : ''}`}>
-      <Link to={paths.home} className="nav-logo" onClick={close}>REIVIT.FI</Link>
+      <Link to={paths.home} className="nav-logo" translate="no" onClick={close}>REIVIT.FI</Link>
 
       <nav aria-label="Main">
         <ul className="nav-links">

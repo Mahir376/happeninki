@@ -23,9 +23,9 @@ export default function Team() {
                   <span>{t.ui.photosSoon}</span>
                 </div>
               )}
-              <h2 className="member-name">{m.name}</h2>
+              <h2 className="member-name" translate="no">{m.name}</h2>
               <p className="member-role">{m.roleText ? tr(m.roleText, lang) : t.ui.roles[m.role]}</p>
-              {m.detail && <p className="member-detail">{m.detail}</p>}
+              {m.detail && <p className="member-detail" translate="no">{m.detail}</p>}
               {m.link && <a className="member-link" href={m.link} target="_blank" rel="noreferrer">{t.ui.portfolio}</a>}
             </article>
           ))}

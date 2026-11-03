@@ -75,9 +75,9 @@ export function EventTicket({ event, countdown = false, headingLevel = 3 }) {
         )}
 
         <div>
-          <H className="display ticket-title">{title}</H>
+          <H className="display ticket-title" translate="no">{title}</H>
           {subtitle && <p className="ticket-sub">{subtitle}</p>}
-          <p className="ticket-meta">{location}</p>
+          <p className="ticket-meta" translate="no">{location}</p>
           {tr(event.tagline, lang) && <p className="ticket-meta">{tr(event.tagline, lang)}</p>}
           {countdown && !past && <Countdown event={event} />}
           {tr(event.description, lang) && <p className="ticket-desc">{tr(event.description, lang)}</p>}
@@ -87,8 +87,8 @@ export function EventTicket({ event, countdown = false, headingLevel = 3 }) {
               <ul aria-label={t.events.lineup}>
                 {lineup.map((dj) => (
                   <li key={dj.name}>
-                    <span className="dj-name">{dj.name}</span>
-                    {dj.genre && <span className="dj-genre">{dj.genre}</span>}
+                    <span className="dj-name" translate="no">{dj.name}</span>
+                    {dj.genre && <span className="dj-genre" translate="no">{dj.genre}</span>}
                     <span className="dj-links">
                       {dj.instagram && <a href={dj.instagram} target="_blank" rel="noreferrer">Instagram</a>}
                       {dj.soundcloud && <a href={dj.soundcloud} target="_blank" rel="noreferrer">SoundCloud</a>}
@@ -129,8 +129,8 @@ function Archive({ events }) {
               <summary>
                 <span className="archive-date">{d.dayNum}.{d.monthNum}.{d.year}</span>
                 <span>
-                  <span className="archive-title">{e.title}</span>
-                  <span className="archive-venue">{e.location}</span>
+                  <span className="archive-title" translate="no">{e.title}</span>
+                  <span className="archive-venue" translate="no">{e.location}</span>
                 </span>
                 <span className={`chip chip--${e.concept}`}>{e.concept === 'both' ? t.ui.both : BRAND_NAME[e.concept]}</span>
               </summary>
