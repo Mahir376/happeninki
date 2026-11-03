@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "add-event": "node scripts/add-event.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.34.3",
