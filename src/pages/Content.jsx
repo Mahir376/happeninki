@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useI18n } from '../i18n'
+import { PageHead } from '../components/ui'
 
 const GALLERY_SIZE = 67
 const thumb = (i) => `/img/gallery/thumbs/${i + 1}.jpg`
@@ -28,10 +29,7 @@ export default function Content() {
 
   return (
     <>
-      <div className="wrap page-head">
-        <h1 className="display"><span className="stretch">{t.gallery.title}</span></h1>
-        <p className="lede">{t.gallery.subtitle}</p>
-      </div>
+      <PageHead title={t.gallery.title} lead={t.gallery.subtitle} />
       <section className="wrap section" style={{ paddingTop: 0 }}>
         <div className="gallery">
           {Array.from({ length: GALLERY_SIZE }, (_, i) => (

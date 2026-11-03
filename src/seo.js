@@ -5,8 +5,8 @@
 
 import { SITE_URL, SITE_NAME, ORGANIZATION_LD } from './data/site.js'
 import { RENTAL, faqLd } from './data/rental.js'
-import { getUpcomingEvents, tr } from './data/events.js'
-import { ROUTES } from './routes.js'
+import { getUpcomingEvents, tr, eventIso } from './data/events.js'
+import { ROUTES, langOf } from './routes.js'
 
 function eventsLd(lang) {
   return getUpcomingEvents().map((e) => ({
@@ -14,7 +14,7 @@ function eventsLd(lang) {
     '@type': 'Event',
     name: e.title,
     description: tr(e.description, lang),
-    startDate: e.start,
+    startDate: eventIso(e),
     eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: { '@type': 'Place', name: e.location.split(',')[0], address: e.location },
@@ -48,8 +48,8 @@ const META = {
     en: [`Gallery | ${SITE_NAME}`, 'Photos from Häppeninki and RYYM raves in Tampere.'],
   },
   residents: {
-    fi: [`Residentit | ${SITE_NAME}`, 'Tutustu Häppeningin ja RYYMin residentti-DJ:ihin Tampereella.'],
-    en: [`Residents | ${SITE_NAME}`, 'Meet the resident DJs behind Häppeninki and RYYM in Tampere.'],
+    fi: [`Tiimi | ${SITE_NAME}`, 'Häppeningin ja RYYMin residentti-DJ:t ja videokuvaaja Tampereella.'],
+    en: [`Team | ${SITE_NAME}`, 'The resident DJs and videographer behind Häppeninki and RYYM in Tampere.'],
   },
   services: {
     fi: [`Palvelut | ${SITE_NAME}`, 'Tapahtumatuotanto, juhlien järjestäminen, DJ-palvelut ja kalustovuokraus Tampereella.'],
@@ -84,7 +84,7 @@ export const SEO_PAGES = Object.fromEntries(
   Object.keys(ROUTES).flatMap((key) => ['fi', 'en'].map((lang) => [ROUTES[key][lang], buildPage(key, lang)])),
 )
 
-export const NOT_FOUND = { title: `404 | ${SITE_NAME}`, description: META.home.en[1], lang: 'fi' }
+const notFound = (lang) => ({ title: `404 | ${SITE_NAME}`, description: META.home[lang][1], lang })
 
 // Head tags as an HTML string (used at build time).
 export function headHtml(path, meta) {
@@ -93,7 +93,7 @@ export function headHtml(path, meta) {
   const tags = [
     `<title>${esc(meta.title)}</title>`,
     `<meta name="description" content="${esc(meta.description)}" />`,
-    `<link rel="canonical" href="${url}" />`,
+    meta.alternates ? `<link rel="canonical" href="${url}" />` : `<meta name="robots" content="noindex" />`,
     `<meta property="og:url" content="${url}" />`,
     `<meta property="og:title" content="${esc(meta.ogTitle || meta.title)}" />`,
     `<meta property="og:description" content="${esc(meta.ogDescription || meta.description)}" />`,
@@ -106,7 +106,7 @@ export function headHtml(path, meta) {
 
 // Same tags, applied live in the browser on every route change.
 export function applySeo(path) {
-  const meta = SEO_PAGES[path] || NOT_FOUND
+  const meta = SEO_PAGES[path] || notFound(langOf(path))
   const head = document.head
   document.documentElement.lang = meta.lang
   document.title = meta.title

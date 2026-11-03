@@ -1,4 +1,4 @@
-import { Duo } from '../components/ui'
+import { PageHead } from '../components/ui'
 import { useI18n } from '../i18n'
 import { TEAM } from '../data/team'
 
@@ -6,29 +6,23 @@ export default function Team() {
   const { t } = useI18n()
   return (
     <>
-      <div className="wrap page-head">
-        <h1 className="display"><span className="stretch">{t.residents.title}</span></h1>
-        <p className="lede">{t.residents.intro}</p>
-      </div>
+      <PageHead title={t.residents.title} lead={t.residents.intro} />
       <section className="wrap section" style={{ paddingTop: 0 }} aria-label={t.residents.title}>
-        <div className="team-grid">
+        <ul className="people">
           {TEAM.map((m) => (
-            <article key={m.id} className={`member theme-${m.ink === 'red' ? 'ryym' : 'happeninki'}`}>
+            <li key={m.id} className="person">
               {m.image ? (
-                <Duo src={m.image} alt={m.name} />
+                <div className="person-photo"><img src={m.image} alt={m.name} loading="lazy" decoding="async" /></div>
               ) : (
-                <div className="member-blank" aria-hidden="true">
-                  <b>{m.name[0]}</b>
-                  <span>{t.ui.photosSoon}</span>
-                </div>
+                <div className="person-photo person-photo--empty">{t.ui.photosSoon}</div>
               )}
-              <h2 className="member-name">{m.name}</h2>
-              <p className="member-role">{t.ui.roles[m.role]}</p>
-              {m.detail && <p className="member-detail">{m.detail}</p>}
-              {m.link && <a className="member-link" href={m.link} target="_blank" rel="noreferrer">{t.ui.portfolio}</a>}
-            </article>
+              <h2 className="person-name">{m.name}</h2>
+              <p className="person-role">{t.ui.roles[m.role]}</p>
+              {m.detail && <p className="person-detail">{m.detail}</p>}
+              {m.link && <a className="person-link" href={m.link} target="_blank" rel="noreferrer">{t.ui.portfolio}</a>}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </>
   )
