@@ -1,0 +1,60 @@
+name: Team member (add or change)
+description: Add someone to the team page, or change an existing person's role, photo, genres or link.
+title: "Team: "
+labels: ["team"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **New person:** fill in the name, role and photo.
+        **Change someone:** write their name exactly as it is on the site, then fill in only what changes. Empty fields stay as they are.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: Santeri
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Role
+      description: Pick one, or choose "Other" and write the role below.
+      options:
+        - Resident DJ
+        - Videographer
+        - Event Production, Business Development & Strategic Partnerships
+        - Other (write it below)
+  - type: input
+    id: role_fi
+    attributes:
+      label: Role in Finnish
+      description: Only if the role is not in the list.
+      placeholder: Valokuvaaja
+  - type: input
+    id: role_en
+    attributes:
+      label: Role in English
+      placeholder: Photographer
+  - type: input
+    id: detail
+    attributes:
+      label: Genres or short description
+      description: Shown under the role, e.g. a DJ's genres.
+      placeholder: Hard Techno / Schranz
+  - type: input
+    id: link
+    attributes:
+      label: Portfolio / Instagram link
+      placeholder: https://instagram.com/...
+  - type: textarea
+    id: photo
+    attributes:
+      label: Photo
+      description: Drag a photo in here. It is cropped to a portrait automatically.
+  - type: checkboxes
+    id: remove
+    attributes:
+      label: Remove from the team page
+      options:
+        - label: Remove this person from the site

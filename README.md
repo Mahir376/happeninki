@@ -39,6 +39,9 @@ canonical, hreflang and structured data (FAQ, Organization, Event), plus `sitema
   Finnish and English, lineup, poster, and for past nights a box to drag in photos. Upcoming events
   show on the front page with a countdown; past events go to Past events, where each one opens to
   show its poster, lineup and photos.
+- **Team member (add or change):** add someone to the team page, or change an existing person's
+  role, photo, genres or link (write their name as it is on the site; empty fields stay the same).
+  Custom roles can be written in Finnish and English. A checkbox removes someone.
 - **Artist (previously showcased):** name, country, genre, brand, which night they played, Instagram
   and SoundCloud links and a photo. Shows on the front page and on the Häppeninki or RYYM page.
 
@@ -53,7 +56,7 @@ Data lives in `src/data/events.json` and `src/data/artists.json`; images go to `
 **New event from the terminal:** `npm run add-event` asks the same questions, then commit and push.
 Events are stored in `src/data/events.json`.
 
-**Team:** people on the team page are in `src/data/team.js` (photo, role, genres, portfolio link).
+**Team:** people on the team page are in `src/data/team.json` (use the Team member form).
 
 **New photos:** put the full-size photo in `media/` (gallery photos in `media/gallery/`, named with
 the next number: 68.jpg, 69.jpg, ...), bump `GALLERY_SIZE` in `src/pages/Content.jsx`, then run:

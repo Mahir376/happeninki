@@ -1,0 +1,42 @@
+[
+  {
+    "id": "mahir",
+    "name": "Mahir",
+    "role": "dj",
+    "image": "/img/residents/r1.jpg",
+    "detail": "Industrial / Hard Techno / Hardcore",
+    "link": ""
+  },
+  {
+    "id": "riku",
+    "name": "Riku",
+    "role": "dj",
+    "image": "/img/residents/r2.jpg",
+    "detail": "Hardgroove / Hypnotic",
+    "link": ""
+  },
+  {
+    "id": "tiskimikko",
+    "name": "Tiskimikko",
+    "role": "dj",
+    "image": "/img/residents/r3.jpg",
+    "detail": "Hard Techno / Schranz",
+    "link": ""
+  },
+  {
+    "id": "santeri",
+    "name": "Santeri",
+    "role": "production",
+    "image": "/img/team/santeri.jpg",
+    "detail": "",
+    "link": ""
+  },
+  {
+    "id": "chris",
+    "name": "Chris",
+    "role": "video",
+    "image": "/img/team/chris.jpg",
+    "detail": "",
+    "link": ""
+  }
+]

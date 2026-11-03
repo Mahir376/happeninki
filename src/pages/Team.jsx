@@ -1,9 +1,10 @@
 import { Duo } from '../components/ui'
 import { useI18n } from '../i18n'
 import { TEAM } from '../data/team'
+import { tr } from '../data/events'
 
 export default function Team() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   return (
     <>
       <div className="wrap page-head">
@@ -23,7 +24,7 @@ export default function Team() {
                 </div>
               )}
               <h2 className="member-name">{m.name}</h2>
-              <p className="member-role">{t.ui.roles[m.role]}</p>
+              <p className="member-role">{m.roleText ? tr(m.roleText, lang) : t.ui.roles[m.role]}</p>
               {m.detail && <p className="member-detail">{m.detail}</p>}
               {m.link && <a className="member-link" href={m.link} target="_blank" rel="noreferrer">{t.ui.portfolio}</a>}
             </article>

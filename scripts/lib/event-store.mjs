@@ -12,6 +12,8 @@ const POSTER_DIR = path.join(ROOT, 'public/img/posters')
 const EVENT_PHOTO_DIR = path.join(ROOT, 'public/img/events')
 const ARTIST_DIR = path.join(ROOT, 'public/img/artists')
 export const ARTISTS_JSON = path.join(ROOT, 'src/data/artists.json')
+export const TEAM_JSON = path.join(ROOT, 'src/data/team.json')
+const TEAM_DIR = path.join(ROOT, 'public/img/team')
 
 export const slugify = (s) =>
   s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -198,4 +200,53 @@ export async function saveArtistPhoto(input, id) {
   await sharp(input).rotate().resize({ width: 1200, height: 1500, fit: 'inside', withoutEnlargement: true })
     .jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(ARTIST_DIR, `${id}.jpg`))
   return `/img/artists/${id}.jpg`
+}
+
+// ---------- Team ----------
+
+const ROLE_KEYS = { 'resident dj': 'dj', videographer: 'video', 'event production': 'production' }
+export const roleKeyOf = (label) => {
+  const l = (label || '').toLowerCase()
+  return Object.entries(ROLE_KEYS).find(([k]) => l.startsWith(k))?.[1] ?? ''
+}
+
+// Adds a person, or updates the one with the same name (case-insensitive).
+// Empty fields keep the current value. remove: true deletes the person.
+export async function upsertMember(f) {
+  const list = JSON.parse(await readFile(TEAM_JSON, 'utf8'))
+  const name = (f.name || '').trim()
+  if (!name) return { errors: ['Name is missing.'] }
+  if (f.link && !isUrl(f.link.trim())) return { errors: ['Portfolio / Instagram link must start with https://'] }
+  const i = list.findIndex((m) => m.name.toLowerCase() === name.toLowerCase())
+
+  if (f.remove) {
+    if (i < 0) return { errors: [`Nobody called ${name} is on the team page.`] }
+    list.splice(i, 1)
+    await writeFile(TEAM_JSON, JSON.stringify(list, null, 2) + '\n')
+    return { action: 'removed', member: { name } }
+  }
+
+  const current = i >= 0 ? list[i] : { id: slugify(name), name, role: '', image: '', detail: '', link: '' }
+  const m = { ...current, name: i >= 0 ? current.name : name }
+  const key = roleKeyOf(f.role)
+  const fi = (f.roleFi || '').trim()
+  const en = (f.roleEn || '').trim()
+  if (fi || en) { m.roleText = { fi: fi || en, en: en || fi }; if (key) m.role = key }
+  else if (key) { m.role = key; delete m.roleText }
+  if (!m.role && !m.roleText) return { errors: ['Pick a role, or write the role in Finnish or English.'] }
+  if (f.detail?.trim()) m.detail = f.detail.trim()
+  if (f.link?.trim()) m.link = f.link.trim()
+  if (f.image) m.image = f.image
+  if (i >= 0) list[i] = m
+  else list.push(m)
+  await writeFile(TEAM_JSON, JSON.stringify(list, null, 2) + '\n')
+  return { action: i >= 0 ? 'updated' : 'added', member: m }
+}
+
+export async function saveTeamPhoto(input, id) {
+  await mkdir(TEAM_DIR, { recursive: true })
+  // portrait 3:4 crop, focused on the top where faces usually are
+  await sharp(input).rotate().resize({ width: 1050, height: 1400, fit: 'cover', position: 'north' })
+    .jpeg({ quality: 84, mozjpeg: true }).toFile(path.join(TEAM_DIR, `${id}.jpg`))
+  return `/img/team/${id}.jpg`
 }
