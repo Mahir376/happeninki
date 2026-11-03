@@ -1,5 +1,63 @@
 [
   {
+    "id": "feral-x-ryym-2026",
+    "title": "FERAL X RYYM",
+    "subtitle": "Feral is coming to Tampere!",
+    "tagline": {
+      "fi": "FERAL TULOSSA TAMPERELLA",
+      "en": "FERAL MAKES THEIR FINNISH DEBUT"
+    },
+    "concept": "ryym",
+    "start": "2026-12-05T22:00",
+    "time": "22:00 - 04:00",
+    "location": "F54",
+    "image": "/img/posters/feral-x-ryym-2026.jpg",
+    "description": {
+      "fi": "",
+      "en": ""
+    },
+    "ticketLink": "https://biletti.fi/e/ryym-invites-feral-tampere",
+    "lineup": [
+      {
+        "name": "Tiskimikko",
+        "genre": "",
+        "instagram": "",
+        "soundcloud": ""
+      },
+      {
+        "name": "Lynnsy",
+        "genre": "",
+        "instagram": "",
+        "soundcloud": ""
+      },
+      {
+        "name": "Foss",
+        "genre": "",
+        "instagram": "",
+        "soundcloud": ""
+      },
+      {
+        "name": "Stefka",
+        "genre": "",
+        "instagram": "",
+        "soundcloud": ""
+      },
+      {
+        "name": "Dark matter",
+        "genre": "",
+        "instagram": "",
+        "soundcloud": ""
+      },
+      {
+        "name": "Valkrund b2b mahir",
+        "genre": "",
+        "instagram": "",
+        "soundcloud": ""
+      }
+    ],
+    "issue": 1
+  },
+  {
     "id": "mirage-2026",
     "title": "MIRAGE - F2F RAVE",
     "subtitle": "RYYM X MUSTAKOLHOOSI",
