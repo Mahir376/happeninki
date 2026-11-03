@@ -80,7 +80,7 @@ export function EventTicket({ event, countdown = false, headingLevel = 3 }) {
           <p className="ticket-meta">{location}</p>
           {tr(event.tagline, lang) && <p className="ticket-meta">{tr(event.tagline, lang)}</p>}
           {countdown && !past && <Countdown event={event} />}
-          <p className="ticket-desc">{tr(event.description, lang)}</p>
+          {tr(event.description, lang) && <p className="ticket-desc">{tr(event.description, lang)}</p>}
 
           {lineup?.length > 0 && (
             <div className="ticket-lineup">

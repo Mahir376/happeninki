@@ -37,7 +37,7 @@ body:
     id: date
     attributes:
       label: Date
-      description: Day the event starts.
+      description: Day the event starts, e.g. 6.3.2026, 6-3-2026 or 2026-03-06.
       placeholder: 6.3.2026
     validations:
       required: true
@@ -83,7 +83,7 @@ body:
     id: desc_fi
     attributes:
       label: Description (Finnish)
-      description: Write at least one of the two descriptions. If you only write one, it is used for both languages.
+      description: Optional. If you only write one language, it is used for both.
   - type: textarea
     id: desc_en
     attributes:

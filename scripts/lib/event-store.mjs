@@ -20,13 +20,13 @@ export const slugify = (s) =>
 
 export const isUrl = (s) => /^https?:\/\/\S+$/i.test(s)
 
-// Accepts 2026-03-06, 6.3.2026, 06.03.2026, 6/3/2026
+// Accepts 2026-03-06, 6.3.2026, 06.03.2026, 6/3/2026, 6-3-2026
 export function parseDate(input) {
   const s = input.trim()
   let y, m, d
   let match = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
   if (match) [, y, m, d] = match
-  else if ((match = s.match(/^(\d{1,2})[./](\d{1,2})[./](\d{4})$/))) [, d, m, y] = match
+  else if ((match = s.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$/))) [, d, m, y] = match
   else return null
   const date = new Date(Number(y), Number(m) - 1, Number(d))
   if (date.getFullYear() !== Number(y) || date.getMonth() !== Number(m) - 1 || date.getDate() !== Number(d)) return null
@@ -78,7 +78,6 @@ export function buildEvent(f) {
   const end = parseTime(f.endTime || '')
   if (!end) errors.push(`End time "${f.endTime || ''}" is not valid. Use for example 04:00.`)
   if (!(f.location || '').trim()) errors.push('Venue is missing.')
-  if (!(f.descFi || '').trim() && !(f.descEn || '').trim()) errors.push('Add a description in Finnish or English.')
   const ticketLink = (f.ticketLink || '').trim()
   if (ticketLink && !isUrl(ticketLink)) errors.push('Ticket link must start with https://')
 
