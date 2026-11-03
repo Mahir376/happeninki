@@ -11,8 +11,8 @@ npm run dev        # http://localhost:5173
 
 ## Design
 
-Two inks on black: Häppeninki violet `#7A3CFF` and RYYM red `#FF2A1A`; photos and video are
-tinted in the ink of the page. Events sit on a light concrete board. Fonts are Anton and Archivo
+Two inks on black: Häppeninki violet `#7A3CFF` and RYYM red `#FF2A1A` for type and details;
+photos and video are shown in their own colours. Events sit on a light concrete board. Fonts are Anton and Archivo
 (free, self-hosted via npm, no Google Fonts requests). All styles are in `src/styles/theme.css`.
 
 ## Languages
@@ -32,16 +32,23 @@ canonical, hreflang and structured data (FAQ, Organization, Event), plus `sitema
 
 ## Everyday updates
 
-**New event (easiest, works from your phone):**
+**Adding to the site from GitHub (works from your phone):** open the repo, go to
+**Issues > New issue** and pick a form:
 
-1. On GitHub open the repo, go to **Issues > New issue** and pick **New event**.
-2. Fill in the form (Finnish dates like 6.3.2026 work) and drag the poster into the Poster box.
-3. Submit. A bot adds the event, converts the poster, checks the site builds, publishes it and
-   replies on the issue within about a minute.
-4. Need to change something? Edit the issue. The same event updates (it is never duplicated).
+- **Event (upcoming or past):** title, date (6.3.2026 works), times, venue, tickets, descriptions in
+  Finnish and English, lineup, poster, and for past nights a box to drag in photos. Upcoming events
+  show on the front page with a countdown; past events go to Past events, where each one opens to
+  show its poster, lineup and photos.
+- **Artist (previously showcased):** name, country, genre, brand, which night they played, Instagram
+  and SoundCloud links and a photo. Shows on the front page and on the Häppeninki or RYYM page.
 
-Only people with write access to the repo can publish this way. Past events move to the
-archive by themselves 6 hours after they start.
+Submit, and a bot converts the images, checks the site builds, publishes it and replies on the issue
+within about a minute. To change something later, edit the issue: the same entry updates, it is
+never duplicated. If something is wrong (a bad date, a missing name) the bot replies with what to
+fix. Only people with write access to the repo can publish.
+
+Data lives in `src/data/events.json` and `src/data/artists.json`; images go to `public/img/posters`,
+`public/img/events/<event>` and `public/img/artists`.
 
 **New event from the terminal:** `npm run add-event` asks the same questions, then commit and push.
 Events are stored in `src/data/events.json`.

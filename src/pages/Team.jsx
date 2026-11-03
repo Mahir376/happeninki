@@ -13,7 +13,7 @@ export default function Team() {
       <section className="wrap section" style={{ paddingTop: 0 }} aria-label={t.residents.title}>
         <div className="team-grid">
           {TEAM.map((m) => (
-            <article key={m.id} className={`member theme-${m.ink === 'red' ? 'ryym' : 'happeninki'}`}>
+            <article key={m.id} className="member">
               {m.image ? (
                 <Duo src={m.image} alt={m.name} />
               ) : (

@@ -121,21 +121,38 @@ function Archive({ events }) {
   return (
     <section className="archive" aria-labelledby="archive-title">
       <h2 id="archive-title" className="display">{t.ui.past}</h2>
-      <ul>
+      <div>
         {events.map((e) => {
           const d = dateParts(e, t.events.months, t.ui.weekdays)
           return (
-            <li key={e.id}>
-              <span className="archive-date">{d.dayNum}.{d.monthNum}.{d.year}</span>
-              <span>
-                <span className="archive-title">{e.title}</span>
-                <span className="archive-venue"> {e.location}</span>
-              </span>
-              <span className={`chip chip--${e.concept}`}>{e.concept === 'both' ? t.ui.both : BRAND_NAME[e.concept]}</span>
-            </li>
+            <details key={e.id}>
+              <summary>
+                <span className="archive-date">{d.dayNum}.{d.monthNum}.{d.year}</span>
+                <span>
+                  <span className="archive-title">{e.title}</span>
+                  <span className="archive-venue">{e.location}</span>
+                </span>
+                <span className={`chip chip--${e.concept}`}>{e.concept === 'both' ? t.ui.both : BRAND_NAME[e.concept]}</span>
+              </summary>
+              <div className="archive-body">
+                <EventTicket event={e} headingLevel={3} />
+                {e.photos?.length > 0 && (
+                  <>
+                    <p className="photos-title">{t.gallery.title}</p>
+                    <div className="photos">
+                      {e.photos.map((src, i) => (
+                        <a key={src} href={src} target="_blank" rel="noreferrer" aria-label={`${t.gallery.photo} ${i + 1}`}>
+                          <img src={src} alt="" loading="lazy" decoding="async" />
+                        </a>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+            </details>
           )
         })}
-      </ul>
+      </div>
     </section>
   )
 }

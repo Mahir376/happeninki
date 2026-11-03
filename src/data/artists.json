@@ -1,0 +1,8 @@
+[
+  { "id": "beau-didier", "name": "Beau Didier", "from": "NL", "genre": "Hypnotic techno / Hard groove", "concept": "happeninki", "image": "/img/artists/beau.jpg", "position": "", "instagram": "", "soundcloud": "", "playedAt": "" },
+  { "id": "hujus", "name": "Hujus", "from": "NL", "genre": "Hypnotic techno / Hard groove", "concept": "happeninki", "image": "/img/artists/hujus.jpg", "position": "", "instagram": "", "soundcloud": "", "playedAt": "" },
+  { "id": "isaiah", "name": "Isaiah", "from": "NL", "genre": "Hypnotic techno / Hard groove", "concept": "happeninki", "image": "/img/artists/isaiah.jpg", "position": "center 30%", "instagram": "", "soundcloud": "", "playedAt": "" },
+  { "id": "schellt", "name": "Schellt", "from": "UA", "genre": "Schranz", "concept": "ryym", "image": "/img/artists/schellt.jpg", "position": "center 30%", "instagram": "", "soundcloud": "", "playedAt": "Arctic Rave Cage" },
+  { "id": "axiver", "name": "Axiver", "from": "ITA", "genre": "Neo Rave", "concept": "ryym", "image": "/img/artists/axiver.jpg", "position": "center 30%", "instagram": "", "soundcloud": "", "playedAt": "Arctic Rave Cage" },
+  { "id": "kaki", "name": "Kaki", "from": "NL", "genre": "Hard Industrial / Experimental", "concept": "ryym", "image": "/img/artists/kaki.png", "position": "", "instagram": "", "soundcloud": "", "playedAt": "" }
+]

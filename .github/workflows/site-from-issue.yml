@@ -1,9 +1,10 @@
-name: Add event from issue
+name: Update site from issue
 
-# Fill in Issues > New issue > "New event". This adds the event to
-# src/data/events.json, converts the poster, checks the site still builds,
-# commits to main (Vercel then deploys) and replies on the issue.
-# Editing the issue updates the same event.
+# Issues > New issue gives two forms:
+#   "Event (upcoming or past)"  -> src/data/events.json (+ poster and photos)
+#   "Artist (previously showcased)" -> src/data/artists.json (+ photo)
+# This checks the site still builds, commits to main (Vercel then deploys)
+# and replies on the issue. Editing the issue updates the same entry.
 on:
   issues:
     types: [opened, edited]
@@ -13,14 +14,14 @@ permissions:
   issues: write
 
 concurrency:
-  group: add-event
+  group: site-from-issue
   cancel-in-progress: false
 
 jobs:
-  add-event:
-    # Only people with write access to the repo can publish events
+  update:
+    # Only people with write access to the repo can publish
     if: >-
-      contains(github.event.issue.labels.*.name, 'new-event') &&
+      (contains(github.event.issue.labels.*.name, 'new-event') || contains(github.event.issue.labels.*.name, 'new-artist')) &&
       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
     runs-on: ubuntu-latest
     steps:
@@ -31,33 +32,38 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Add event
-        id: add
+      - name: Read the form
+        id: read
         continue-on-error: true
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/event-from-issue.mjs
+          IS_ARTIST: ${{ contains(github.event.issue.labels.*.name, 'new-artist') }}
+        run: |
+          if [ "$IS_ARTIST" = "true" ]; then node scripts/artist-from-issue.mjs; else node scripts/event-from-issue.mjs; fi
 
       - name: Check the site still builds
         id: build
-        if: steps.add.outcome == 'success'
+        if: steps.read.outcome == 'success'
         continue-on-error: true
         run: npm run lint && npm run build
 
       - name: Commit and push
         id: push
-        if: steps.add.outcome == 'success' && steps.build.outcome == 'success'
+        if: steps.read.outcome == 'success' && steps.build.outcome == 'success'
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          IS_ARTIST: ${{ contains(github.event.issue.labels.*.name, 'new-artist') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/events.json public/img/posters 2>/dev/null || git add src/data/events.json
+          git add src/data/events.json src/data/artists.json
+          for d in public/img/posters public/img/events public/img/artists; do [ -d "$d" ] && git add "$d"; done
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          TITLE=$(node -p "require('./.event-result.json').title")
-          git commit -m "Add event: ${TITLE} (#${ISSUE_NUMBER})"
+          TITLE=$(node -p "require('./.issue-result.json').title")
+          KIND=$([ "$IS_ARTIST" = "true" ] && echo "artist" || echo "event")
+          git commit -m "Update ${KIND}: ${TITLE} (#${ISSUE_NUMBER})"
           git pull --rebase origin main
           git push origin HEAD:main
 
@@ -70,14 +76,14 @@ jobs:
         with:
           script: |
             const fs = require('fs')
-            let result = { ok: false, message: 'Something went wrong before the event could be read. See the workflow log.' }
-            try { result = JSON.parse(fs.readFileSync('.event-result.json', 'utf8')) } catch {}
+            let result = { ok: false, message: 'Something went wrong before the form could be read. See the workflow log.' }
+            try { result = JSON.parse(fs.readFileSync('.issue-result.json', 'utf8')) } catch {}
             let body = result.message
             if (result.ok && process.env.BUILD_OUTCOME !== 'success') {
-              body = 'The event was read, but the site did not build with it, so nothing was published. See the workflow log, or ask for help.'
+              body = 'The form was read, but the site did not build with it, so nothing was published. See the workflow log.'
               result.ok = false
             } else if (result.ok && process.env.PUSH_OUTCOME !== 'success') {
-              body = 'The event was read, but publishing failed. See the workflow log.'
+              body = 'The form was read, but publishing failed. See the workflow log.'
               result.ok = false
             }
             const { owner, repo } = context.repo

@@ -1,6 +1,6 @@
-name: New event
-description: Add an upcoming event to reivit.fi. Submit, and the site updates itself in about a minute.
-title: "New event: "
+name: Event (upcoming or past)
+description: Add any event to reivit.fi, upcoming or already happened. The date decides where it shows. Submit, and the site updates itself in about a minute.
+title: "Event: "
 labels: ["new-event"]
 body:
   - type: markdown
@@ -8,6 +8,9 @@ body:
       value: |
         Fill in what you know now. To change anything later, **edit this issue** and the event on the site updates.
         Only the fields marked with a red star are required.
+
+        **Upcoming event:** it appears on the front page and the events page with a countdown.
+        **Past event:** use the real date; it goes straight to Past events, with the poster and photos below.
   - type: dropdown
     id: brand
     attributes:
@@ -100,3 +103,8 @@ body:
     attributes:
       label: Poster
       description: Drag the poster image into this box (JPG or PNG). It is resized for the web automatically.
+  - type: textarea
+    id: photos
+    attributes:
+      label: Photos from the night
+      description: For past events. Drag in as many photos as you like; they show when someone opens the event under Past events.

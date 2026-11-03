@@ -1,10 +1,9 @@
 import { useI18n } from '../i18n'
 
-// Photo or video tinted in the current ink (duotone).
-// ink: 'violet' | 'red' | 'both' forces a colour, otherwise the page's ink is used.
-export function Duo({ src, alt = '', ink, className = '', position, eager = false }) {
+// Photo in a cropped frame (natural colour)
+export function Duo({ src, alt = '', className = '', position, eager = false }) {
   return (
-    <div className={`duo ${ink ? `duo--${ink}` : ''} ${className}`}>
+    <div className={`duo ${className}`}>
       <img
         src={src}
         alt={alt}
@@ -16,9 +15,9 @@ export function Duo({ src, alt = '', ink, className = '', position, eager = fals
   )
 }
 
-export function HeroVideo({ ink }) {
+export function HeroVideo() {
   return (
-    <div className={`duo ${ink ? `duo--${ink}` : ''}`} aria-hidden="true">
+    <div className="duo" aria-hidden="true">
       <video autoPlay muted loop playsInline preload="metadata" poster="/video/hero-poster.jpg">
         <source src="/video/hero.webm" type="video/webm" />
         <source src="/video/hero.mp4" type="video/mp4" />

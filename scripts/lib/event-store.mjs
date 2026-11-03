@@ -9,6 +9,9 @@ import sharp from 'sharp'
 export const ROOT = path.resolve(import.meta.dirname, '..', '..')
 export const EVENTS_JSON = path.join(ROOT, 'src/data/events.json')
 const POSTER_DIR = path.join(ROOT, 'public/img/posters')
+const EVENT_PHOTO_DIR = path.join(ROOT, 'public/img/events')
+const ARTIST_DIR = path.join(ROOT, 'public/img/artists')
+export const ARTISTS_JSON = path.join(ROOT, 'src/data/artists.json')
 
 export const slugify = (s) =>
   s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -111,6 +114,7 @@ export async function upsertEvent(event) {
   if (existing >= 0) {
     event.id = events[existing].id
     if (!event.image) event.image = events[existing].image
+    if (!event.photos?.length && events[existing].photos?.length) event.photos = events[existing].photos
     events[existing] = event
   } else {
     let id = event.id
@@ -131,4 +135,67 @@ export async function savePoster(input, id) {
     .jpeg({ quality: 82, mozjpeg: true })
     .toFile(out)
   return `/img/posters/${id}.jpg`
+}
+
+// Photos from the night: /public/img/events/<id>/1.jpg, 2.jpg ...
+export async function saveEventPhotos(inputs, id) {
+  const dir = path.join(EVENT_PHOTO_DIR, id)
+  await mkdir(dir, { recursive: true })
+  const out = []
+  for (const [i, input] of inputs.entries()) {
+    const file = path.join(dir, `${i + 1}.jpg`)
+    await sharp(input).rotate().resize({ width: 2000, height: 2000, fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality: 80, mozjpeg: true }).toFile(file)
+    out.push(`/img/events/${id}/${i + 1}.jpg`)
+  }
+  return out
+}
+
+// ---------- Artists ----------
+
+export function buildArtist(f) {
+  const errors = []
+  const name = (f.name || '').trim()
+  if (!name) errors.push('Artist name is missing.')
+  const concept = { happeninki: 'happeninki', ryym: 'ryym', both: 'both' }[String(f.concept || '').toLowerCase()]
+  if (!concept) errors.push('Brand must be Häppeninki, RYYM or both.')
+  for (const [label, v] of [['Instagram', f.instagram], ['SoundCloud', f.soundcloud]]) {
+    if (v && !isUrl(v.trim())) errors.push(`${label} link must start with https://`)
+  }
+  const artist = {
+    id: slugify(name),
+    name,
+    from: (f.from || '').trim().toUpperCase(),
+    genre: (f.genre || '').trim(),
+    concept,
+    image: f.image || '',
+    position: '',
+    instagram: (f.instagram || '').trim(),
+    soundcloud: (f.soundcloud || '').trim(),
+    playedAt: (f.playedAt || '').trim(),
+    ...(f.issue ? { issue: f.issue } : {}),
+  }
+  return { artist, errors }
+}
+
+export async function upsertArtist(artist) {
+  const list = JSON.parse(await readFile(ARTISTS_JSON, 'utf8'))
+  let i = artist.issue ? list.findIndex((a) => a.issue === artist.issue) : -1
+  if (i < 0) i = list.findIndex((a) => a.id === artist.id && !a.issue)
+  if (i >= 0) {
+    if (!artist.image) artist.image = list[i].image
+    artist.position = list[i].position || ''
+    list[i] = artist
+  } else {
+    list.push(artist)
+  }
+  await writeFile(ARTISTS_JSON, JSON.stringify(list, null, 2) + '\n')
+  return { artist, replaced: i >= 0 }
+}
+
+export async function saveArtistPhoto(input, id) {
+  await mkdir(ARTIST_DIR, { recursive: true })
+  await sharp(input).rotate().resize({ width: 1200, height: 1500, fit: 'inside', withoutEnlargement: true })
+    .jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(ARTIST_DIR, `${id}.jpg`))
+  return `/img/artists/${id}.jpg`
 }

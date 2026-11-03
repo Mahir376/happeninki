@@ -1,0 +1,58 @@
+name: Artist (previously showcased)
+description: Add an artist who has played at Häppeninki or RYYM to the "Previously showcased" section.
+title: "Artist: "
+labels: ["new-artist"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The artist appears on the front page and on the Häppeninki or RYYM page. To change anything later, **edit this issue**.
+  - type: input
+    id: name
+    attributes:
+      label: Artist name
+      placeholder: Beau Didier
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: Short code shown next to the name.
+      placeholder: NL
+  - type: input
+    id: genre
+    attributes:
+      label: Genre
+      placeholder: Hypnotic techno / Hard groove
+  - type: dropdown
+    id: brand
+    attributes:
+      label: Brand
+      options:
+        - Häppeninki
+        - RYYM
+        - Both (Häppeninki + RYYM)
+    validations:
+      required: true
+  - type: input
+    id: played
+    attributes:
+      label: Played at
+      description: Which night they played, if you want it shown.
+      placeholder: Arctic Rave Cage
+  - type: input
+    id: instagram
+    attributes:
+      label: Instagram link
+      placeholder: https://instagram.com/...
+  - type: input
+    id: soundcloud
+    attributes:
+      label: SoundCloud link
+      placeholder: https://soundcloud.com/...
+  - type: textarea
+    id: photo
+    attributes:
+      label: Photo
+      description: Drag one photo of the artist in here. Portrait photos look best.

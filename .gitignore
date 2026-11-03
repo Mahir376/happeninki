@@ -25,4 +25,4 @@ dist-ssr
 
 # Full-size camera originals (npm run optimize:images turns them into public/img)
 /media
-.event-result.json
+.issue-result.json
