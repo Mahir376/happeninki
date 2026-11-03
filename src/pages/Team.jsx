@@ -1,32 +1,35 @@
+import { Duo } from '../components/ui'
 import { useI18n } from '../i18n'
-import './Team.css'
-
-const RESIDENTS = [
-  { id: 1, name: 'Mahir', image: 'r1.jpg', genre: 'Industrial / Hard Techno / Hardcore' },
-  { id: 2, name: 'Riku', image: 'r2.jpg', genre: 'Hardgroove / Hypnotic' },
-  { id: 3, name: 'Tiskimikko', image: 'r3.jpg', genre: 'Hard Techno / Schranz' },
-]
+import { TEAM } from '../data/team'
 
 export default function Team() {
   const { t } = useI18n()
   return (
-    <div className="content-wrapper content-wrapper--team app-fade-in">
-      <h1 className="hero-title">{t.residents.title}</h1>
-      <p className="hero-subtitle">{t.residents.intro}</p>
-
-      <section className="team-residents" aria-label={t.residents.aria}>
-        <div className="team-residents-grid">
-          {RESIDENTS.map((resident) => (
-            <div key={resident.id} className="team-resident-card">
-              <div className="team-resident-image-wrap">
-                <img src={`/img/residents/${resident.image}`} alt={resident.name} className="team-resident-img" loading="lazy" decoding="async" />
-              </div>
-              <p className="team-resident-name">{resident.name}</p>
-              <p className="team-resident-genre">{t.residents.genre}: {resident.genre}</p>
-            </div>
+    <>
+      <div className="wrap page-head">
+        <h1 className="display"><span className="stretch">{t.residents.title}</span></h1>
+        <p className="lede">{t.residents.intro}</p>
+      </div>
+      <section className="wrap section" style={{ paddingTop: 0 }} aria-label={t.residents.title}>
+        <div className="team-grid">
+          {TEAM.map((m) => (
+            <article key={m.id} className={`member theme-${m.ink === 'red' ? 'ryym' : 'happeninki'}`}>
+              {m.image ? (
+                <Duo src={m.image} alt={m.name} />
+              ) : (
+                <div className="member-blank" aria-hidden="true">
+                  <b>{m.name[0]}</b>
+                  <span>{t.ui.photosSoon}</span>
+                </div>
+              )}
+              <h2 className="member-name">{m.name}</h2>
+              <p className="member-role">{t.ui.roles[m.role]}</p>
+              {m.detail && <p className="member-detail">{m.detail}</p>}
+              {m.link && <a className="member-link" href={m.link} target="_blank" rel="noreferrer">{t.ui.portfolio}</a>}
+            </article>
           ))}
         </div>
       </section>
-    </div>
+    </>
   )
 }

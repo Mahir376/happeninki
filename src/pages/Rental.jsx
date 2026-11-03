@@ -1,60 +1,62 @@
 import { RENTAL } from '../data/rental'
 import { CONTACT_EMAIL } from '../data/site'
-import './Services.css'
-import './Rental.css'
-
-function GearList({ groups }) {
-  return groups.map((g, i) => (
-    <div className="rental-gear" key={g.label || i}>
-      {g.label && <h4 className="rental-gear-label">{g.label}</h4>}
-      <ul>
-        {g.items.map((item) => <li key={item}>{item}</li>)}
-      </ul>
-    </div>
-  ))
-}
 
 export default function Rental({ lang = 'fi' }) {
   const c = RENTAL[lang]
   const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(c.quote.emailSubject)}&body=${encodeURIComponent(c.quote.emailBody)}`
 
   return (
-    <div className="content-wrapper content-wrapper--services app-fade-in" lang={c.lang}>
-      <h1 className="services-title rental-title">
-        {c.h1}
-        <span className="rental-title-sub">{c.h1Sub}</span>
-      </h1>
-
-      <div className="services-intro rental-intro">
-        {c.intro.map((p) => <p key={p}>{p}</p>)}
-        <a href={mailto} className="cta-button rental-cta">{c.quote.button}</a>
+    <div lang={c.lang}>
+      <div className="wrap page-head">
+        <h1 className="display page-title-long">{c.h1}</h1>
+        <p className="lede"><strong>{c.h1Sub}.</strong> {c.intro[0]}</p>
+        <div style={{ marginTop: 28 }}><a href={mailto} className="btn">{c.quote.button}</a></div>
       </div>
 
-      <section className="services-grid">
-        {c.sections.map((s) => (
-          <article className="services-card" key={s.title}>
-            <h2 className="services-card-title">{s.title}</h2>
-            {s.text.map((p) => <p className="services-card-p" key={p}>{p}</p>)}
-            <GearList groups={s.gear} />
-            {s.after && <p className="services-card-p">{s.after}</p>}
-          </article>
-        ))}
+      <section className="paper section">
+        <div className="wrap">
+          <div className="row-body" style={{ marginBottom: 'clamp(32px, 5vw, 64px)' }}>
+            {c.intro.slice(1).map((p) => <p key={p} style={{ marginBottom: '1em' }}>{p}</p>)}
+          </div>
 
-        <article className="services-card rental-quote-card">
-          <h2 className="services-card-title">{c.quote.title}</h2>
-          {c.quote.text.map((p) => <p className="services-card-p" key={p}>{p}</p>)}
-          <a href={mailto} className="cta-button rental-cta">{c.quote.button}</a>
-        </article>
-      </section>
+          <div className="rows">
+            {c.sections.map((s) => (
+              <article className="row" key={s.title}>
+                <h2 className="display row-title">{s.title}</h2>
+                <div className="row-body">
+                  {s.text.map((p) => <p key={p}>{p}</p>)}
+                  <div className="gear">
+                    {s.gear.map((g, i) => (
+                      <div key={g.label || i}>
+                        {g.label && <h3 className="gear-label"><span>{g.label}</span></h3>}
+                        <ul>{g.items.map((item) => <li key={item}>{item}</li>)}</ul>
+                      </div>
+                    ))}
+                  </div>
+                  {s.after && <p style={{ marginTop: '1em' }}>{s.after}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
 
-      <section className="rental-faq">
-        <h2 className="services-card-title">{c.faqTitle}</h2>
-        {c.faq.map(({ q, a }) => (
-          <details key={q} className="rental-faq-item">
-            <summary>{q}</summary>
-            <p>{a}</p>
-          </details>
-        ))}
+          <div className="quote-box">
+            <div>
+              <h2 className="display">{c.quote.title}</h2>
+              {c.quote.text.map((p) => <p key={p}>{p}</p>)}
+            </div>
+            <a href={mailto} className="btn">{c.quote.button}</a>
+          </div>
+
+          <section className="faq" aria-labelledby="faq-title">
+            <h2 id="faq-title" className="display">{c.faqTitle}</h2>
+            {c.faq.map(({ q, a }) => (
+              <details key={q}>
+                <summary>{q}</summary>
+                <p>{a}</p>
+              </details>
+            ))}
+          </section>
+        </div>
       </section>
     </div>
   )

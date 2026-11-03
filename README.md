@@ -9,6 +9,12 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
+## Design
+
+Two inks on black: Häppeninki violet `#7A3CFF` and RYYM red `#FF2A1A`; photos and video are
+tinted in the ink of the page. Events sit on a light concrete board. Fonts are Anton and Archivo
+(free, self-hosted via npm, no Google Fonts requests). All styles are in `src/styles/theme.css`.
+
 ## Languages
 
 The site is in Finnish (default, root URLs) and English (under `/en`). The FI | EN switch in the
@@ -26,10 +32,21 @@ canonical, hreflang and structured data (FAQ, Organization, Event), plus `sitema
 
 ## Everyday updates
 
-**New event:** edit `src/data/events.js` only. Add the event at the top. The landing page,
-events page and both countdowns pick it up automatically and past events get the PAST badge
-by themselves. Write `description` and `tagline` in both languages. Put the full-size poster in
-`media/`, run `npm run optimize:images` and reference it as `/img/poster-name.jpg`.
+**New event (easiest, works from your phone):**
+
+1. On GitHub open the repo, go to **Issues > New issue** and pick **New event**.
+2. Fill in the form (Finnish dates like 6.3.2026 work) and drag the poster into the Poster box.
+3. Submit. A bot adds the event, converts the poster, checks the site builds, publishes it and
+   replies on the issue within about a minute.
+4. Need to change something? Edit the issue. The same event updates (it is never duplicated).
+
+Only people with write access to the repo can publish this way. Past events move to the
+archive by themselves 6 hours after they start.
+
+**New event from the terminal:** `npm run add-event` asks the same questions, then commit and push.
+Events are stored in `src/data/events.json`.
+
+**Team:** people on the team page are in `src/data/team.js` (photo, role, genres, portfolio link).
 
 **New photos:** put the full-size photo in `media/` (gallery photos in `media/gallery/`, named with
 the next number: 68.jpg, 69.jpg, ...), bump `GALLERY_SIZE` in `src/pages/Content.jsx`, then run:

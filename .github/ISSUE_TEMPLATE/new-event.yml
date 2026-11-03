@@ -1,0 +1,102 @@
+name: New event
+description: Add an upcoming event to reivit.fi. Submit, and the site updates itself in about a minute.
+title: "New event: "
+labels: ["new-event"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in what you know now. To change anything later, **edit this issue** and the event on the site updates.
+        Only the fields marked with a red star are required.
+  - type: dropdown
+    id: brand
+    attributes:
+      label: Brand
+      options:
+        - Häppeninki
+        - RYYM
+        - Both (Häppeninki + RYYM)
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Event title
+      placeholder: MIRAGE - F2F RAVE
+    validations:
+      required: true
+  - type: input
+    id: subtitle
+    attributes:
+      label: Subtitle
+      placeholder: RYYM X MUSTAKOLHOOSI
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: Day the event starts.
+      placeholder: 6.3.2026
+    validations:
+      required: true
+  - type: input
+    id: start
+    attributes:
+      label: Doors open
+      placeholder: "22:00"
+    validations:
+      required: true
+  - type: input
+    id: end
+    attributes:
+      label: Ends
+      placeholder: "04:30"
+    validations:
+      required: true
+  - type: input
+    id: venue
+    attributes:
+      label: Venue
+      placeholder: Fame Nightclub, Tampere
+    validations:
+      required: true
+  - type: input
+    id: tickets
+    attributes:
+      label: Ticket link
+      description: Leave empty if tickets are not on sale yet. The site then shows "Tickets coming soon".
+      placeholder: https://kide.app/events/...
+  - type: input
+    id: tagline_fi
+    attributes:
+      label: Tagline (Finnish)
+      description: One short line shown under the countdown.
+      placeholder: MAD MAX -TEEMAINEN 360-REIVI
+  - type: input
+    id: tagline_en
+    attributes:
+      label: Tagline (English)
+      placeholder: A MAD MAX THEMED 360 RAVE
+  - type: textarea
+    id: desc_fi
+    attributes:
+      label: Description (Finnish)
+      description: Write at least one of the two descriptions. If you only write one, it is used for both languages.
+  - type: textarea
+    id: desc_en
+    attributes:
+      label: Description (English)
+  - type: textarea
+    id: lineup
+    attributes:
+      label: Lineup
+      description: |
+        One artist per line: name | genre | Instagram link | SoundCloud link. Genre and links are optional.
+      placeholder: |
+        Agnia | Industrial/Schranz | https://instagram.com/agnia
+        Discolisko | Hard Techno
+        RSKS
+  - type: textarea
+    id: poster
+    attributes:
+      label: Poster
+      description: Drag the poster image into this box (JPG or PNG). It is resized for the web automatically.

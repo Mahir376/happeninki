@@ -1,31 +1,33 @@
 import { Link } from 'react-router-dom'
 import { useI18n } from '../i18n'
-import './Services.css'
 
 export default function Services() {
   const { t, paths } = useI18n()
   const s = t.services
   return (
-    <div className="content-wrapper content-wrapper--services app-fade-in">
-      <h1 className="services-title">{s.title}</h1>
-      <p className="services-intro">{s.intro}</p>
-
-      <section className="services-grid">
-        {s.cards.map((card) => (
-          <article className="services-card" key={card.title}>
-            <h2 className="services-card-title">{card.title}</h2>
-            {card.p.map((p, i) =>
-              typeof p === 'string' ? (
-                <p className="services-card-p" key={i}>{p}</p>
-              ) : (
-                <p className="services-card-p" key={i}>
-                  {p.pre}<Link to={paths[p.to]}>{p.link}</Link>{p.post}
-                </p>
-              ),
-            )}
-          </article>
-        ))}
+    <>
+      <div className="wrap page-head">
+        <h1 className="display"><span className="stretch">{s.title}</span></h1>
+        <p className="lede">{s.intro}</p>
+      </div>
+      <section className="paper section">
+        <div className="wrap rows">
+          {s.cards.map((card) => (
+            <article className="row" key={card.title}>
+              <h2 className="display row-title">{card.title}</h2>
+              <div className="row-body">
+                {card.p.map((p, i) =>
+                  typeof p === 'string' ? (
+                    <p key={i}>{p}</p>
+                  ) : (
+                    <p key={i}>{p.pre}<Link to={paths[p.to]}>{p.link}</Link>{p.post}</p>
+                  ),
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
-    </div>
+    </>
   )
 }

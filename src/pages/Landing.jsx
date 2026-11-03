@@ -1,31 +1,34 @@
-import HCard from '../components/HCard'
-import RCard from '../components/RCard'
-import { EventCard, RentalTeaser } from './Events'
-import { getNextEvent } from '../data/events'
+import { Link } from 'react-router-dom'
+import { HeroVideo, Ticker } from '../components/ui'
+import { EventsBoard, RentalTeaser } from './Events'
 import { useI18n } from '../i18n'
-import '../components/ConceptCards.css'
+
+function Panel({ to, name, sub, ink, cta }) {
+  return (
+    <Link to={to} className="split-panel">
+      <HeroVideo ink={ink} />
+      <h2 className="display split-name"><span className="stretch">{name}</span></h2>
+      <p className="split-sub">{sub}</p>
+      <span className="split-go">{cta} {name}</span>
+    </Link>
+  )
+}
 
 export default function Landing() {
-  const { t } = useI18n()
-  const next = getNextEvent()
-
+  const { t, paths } = useI18n()
   return (
-    <div className="landing-page">
-      <section className="landing-hero">
-        <h1 className="landing-hero-title">{t.landing.title}</h1>
-        <p className="landing-hero-tagline">{t.landing.tagline}</p>
+    <>
+      <section className="split" aria-labelledby="landing-title">
+        <h1 id="landing-title" className="display split-h1">
+          {t.landing.title}
+          <small>{t.landing.tagline}</small>
+        </h1>
+        <Panel to={paths.happeninki} name="Häppeninki" sub={t.cards.happeninki} ink="violet" cta={t.ui.open} />
+        <Panel to={paths.ryym} name="RYYM" sub={t.cards.ryym} ink="red" cta={t.ui.open} />
       </section>
-      <section className="landing-cards">
-        <HCard />
-        <RCard />
-      </section>
-      {next && (
-        <section className="landing-next-event">
-          <h2 className="landing-next-event-heading">{t.landing.nextEvent}</h2>
-          <EventCard event={next} />
-        </section>
-      )}
+      <Ticker />
+      <EventsBoard />
       <RentalTeaser />
-    </div>
+    </>
   )
 }

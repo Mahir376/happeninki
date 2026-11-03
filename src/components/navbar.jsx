@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useI18n, alternatePath, LANGS } from '../i18n'
 
 const NAV_KEYS = ['events', 'gallery', 'residents', 'services', 'rental', 'contact']
 
-// FI | EN toggle: goes to the same page in the other language
+// FI | EN: goes to the same page in the other language
 export function LangSwitch({ onNavigate }) {
   const { lang, t, pathname } = useI18n()
   return (
@@ -26,46 +26,58 @@ export function LangSwitch({ onNavigate }) {
   )
 }
 
-function Navbar({ navbarScrolled }) {
-  const [isOpen, setIsOpen] = useState(false)
-  const { t, paths } = useI18n()
-  const closeMenu = () => setIsOpen(false)
+function Navbar({ solid }) {
+  const [open, setOpen] = useState(false)
+  const { t, paths, routeKey } = useI18n()
+  const close = () => setOpen(false)
+
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  const link = (k, onClick) => (
+    <Link to={paths[k]} onClick={onClick} aria-current={routeKey === k ? 'page' : undefined}>
+      {t.nav[k]}
+    </Link>
+  )
 
   return (
-    <nav className={`navbar ${navbarScrolled ? 'navbar--scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
-      <Link to={paths.home} className="navbar-logo" onClick={closeMenu}>
-        REIVIT.FI
-      </Link>
+    <header className={`nav ${solid || open ? 'nav--solid' : ''} ${open ? 'nav--open' : ''}`}>
+      <Link to={paths.home} className="nav-logo" onClick={close}>REIVIT.FI</Link>
 
-      <ul className="navbar-links navbar-links-desktop">
-        {NAV_KEYS.map((k) => (
-          <li key={k}><Link to={paths[k]}>{t.nav[k]}</Link></li>
-        ))}
-      </ul>
+      <nav aria-label="Main">
+        <ul className="nav-links">
+          {NAV_KEYS.map((k) => <li key={k}>{link(k)}</li>)}
+        </ul>
+      </nav>
 
-      <div className="navbar-right">
-        <LangSwitch onNavigate={closeMenu} />
+      <div className="nav-right">
+        <LangSwitch onNavigate={close} />
         <button
           type="button"
-          className="navbar-hamburger"
+          className="nav-burger"
           aria-label={t.nav.menu}
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((prev) => !prev)}
+          aria-expanded={open}
+          aria-controls="nav-menu"
+          onClick={() => setOpen((v) => !v)}
         >
-          <span className="navbar-hamburger-line" />
-          <span className="navbar-hamburger-line" />
-          <span className="navbar-hamburger-line" />
+          <span /><span /><span />
         </button>
       </div>
 
-      <div className="navbar-mobile-overlay" aria-hidden={!isOpen} onClick={closeMenu}>
-        <ul className="navbar-links navbar-links-mobile" onClick={(e) => e.stopPropagation()}>
-          {NAV_KEYS.map((k) => (
-            <li key={k}><Link to={paths[k]} onClick={closeMenu}>{t.nav[k]}</Link></li>
-          ))}
+      <div className="nav-menu" id="nav-menu" aria-hidden={!open}>
+        <ul>
+          {NAV_KEYS.map((k) => <li key={k}>{link(k, close)}</li>)}
         </ul>
       </div>
-    </nav>
+    </header>
   )
 }
 

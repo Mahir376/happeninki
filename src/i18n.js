@@ -16,7 +16,7 @@ export function useI18n() {
 
 export const T = {
   fi: {
-    nav: { events: 'Tapahtumat', gallery: 'Galleria', residents: 'Residentit', services: 'Palvelut', rental: 'Kalustovuokraus', contact: 'Yhteystiedot', menu: 'Avaa valikko', lang: 'Kieli' },
+    nav: { events: 'Tapahtumat', gallery: 'Galleria', residents: 'Tiimi', services: 'Palvelut', rental: 'Kalustovuokraus', contact: 'Yhteystiedot', menu: 'Avaa valikko', lang: 'Kieli' },
     landing: {
       title: 'ETSITKÖ REIVEJÄ TAMPEREELLA?',
       tagline: 'MEILTÄ LÖYTYY!',
@@ -40,7 +40,7 @@ export const T = {
       next: 'SEURAAVA TAPAHTUMA:', now: 'NYT KÄYNNISSÄ:', tba: 'TULOSSA',
       tbaText: 'Seuraava päivämäärä julkaistaan ensimmäisenä Instagramissa.',
       follow: 'SEURAA PÄIVITYKSIÄ', tickets: 'OSTA LIPUT',
-      units: { days: 'päivää', hours: 'tuntia', minutes: 'min', seconds: 'sek' },
+      units: { days: 'päivää', hours: 'tuntia', minutes: 'minuuttia', seconds: 'sekuntia' },
     },
     events: {
       title: 'Tapahtumat',
@@ -52,7 +52,7 @@ export const T = {
     gallery: { title: 'Galleria', subtitle: 'Visuaalinen matka tapahtumiemme läpi.', photo: 'Kuva', close: 'Sulje' },
     residents: {
       title: 'Tiimimme',
-      intro: 'Häppeningin ja RYYMin residentit. Soitamme illat, rakennamme äänet ja valot ja pyöritämme tapahtumat itse ensimmäisestä buukkauksesta viimeiseen biisiin. Haluatko jonkun meistä soittamaan tapahtumaasi? Ota yhteyttä.',
+      intro: 'Häppeningin ja RYYMin tiimi. Residentit soittavat illat, rakentavat äänet ja valot ja pyörittävät tapahtumat itse ensimmäisestä buukkauksesta viimeiseen biisiin, ja videokuvaajamme tallentaa kaiken. Haluatko jonkun meistä tapahtumaasi? Ota yhteyttä.',
       genre: 'Tyylilaji', aria: 'Residentti-DJ:t',
     },
     services: {
@@ -98,10 +98,29 @@ export const T = {
     },
     notFound: { text: 'Tätä sivua ei ole olemassa.', back: 'Takaisin etusivulle' },
     footer: { rental: 'Kalustovuokraus Tampere', contact: 'Yhteystiedot' },
+    ui: {
+      skip: 'Siirry sisältöön',
+      open: 'Avaa',
+      upNext: 'Seuraavaksi',
+      upcoming: 'Tulevat',
+      past: 'Menneet tapahtumat',
+      emptyBoard: 'Seuraava päivämäärä julkaistaan pian.',
+      follow: 'Seuraa',
+      weekdays: ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la'],
+      both: 'Häppeninki × RYYM',
+      startsIn: 'Alkuun',
+      roles: { dj: 'Residentti-DJ', video: 'Videokuvaaja' },
+      photosSoon: 'Kuvat tulossa',
+      portfolio: 'Katso portfolio',
+      prev: 'Edellinen kuva',
+      next: 'Seuraava kuva',
+      rights: 'Kaikki oikeudet pidätetään.',
+    },
+    ticker: ['Hard groove', 'Hard bounce', 'Schranz', 'Industrial', 'Hypnotic', 'Safer space', 'Tampere'],
   },
 
   en: {
-    nav: { events: 'Events', gallery: 'Gallery', residents: 'Residents', services: 'Services', rental: 'Rental', contact: 'Contact Us', menu: 'Toggle menu', lang: 'Language' },
+    nav: { events: 'Events', gallery: 'Gallery', residents: 'Team', services: 'Services', rental: 'Rental', contact: 'Contact Us', menu: 'Toggle menu', lang: 'Language' },
     landing: {
       title: 'LOOKING FOR RAVES IN TAMPERE?',
       tagline: 'WE GOT YOU COVERED!',
@@ -137,7 +156,7 @@ export const T = {
     gallery: { title: 'Gallery', subtitle: 'The visual journey of our events.', photo: 'Photo', close: 'Close' },
     residents: {
       title: 'Our Team',
-      intro: 'The residents behind Häppeninki and RYYM. We play the nights, build the sound and light, and run the events ourselves, from the first booking to the last track. Want one of us behind the decks at your event? Get in touch.',
+      intro: 'The crew behind Häppeninki and RYYM. The residents play the nights, build the sound and light and run the events themselves, from the first booking to the last track, and our videographer captures all of it. Want one of us at your event? Get in touch.',
       genre: 'Genre', aria: 'Resident DJs',
     },
     services: {
@@ -183,5 +202,24 @@ export const T = {
     },
     notFound: { text: "This page doesn't exist.", back: 'Back to start' },
     footer: { rental: 'Equipment rental Tampere', contact: 'Contact' },
+    ui: {
+      skip: 'Skip to content',
+      open: 'Open',
+      upNext: 'Up next',
+      upcoming: 'Upcoming',
+      past: 'Past events',
+      emptyBoard: 'The next date drops soon.',
+      follow: 'Follow',
+      weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      both: 'Häppeninki × RYYM',
+      startsIn: 'Starts in',
+      roles: { dj: 'Resident DJ', video: 'Videographer' },
+      photosSoon: 'Photos coming soon',
+      portfolio: 'See portfolio',
+      prev: 'Previous photo',
+      next: 'Next photo',
+      rights: 'All rights reserved.',
+    },
+    ticker: ['Hard groove', 'Hard bounce', 'Schranz', 'Industrial', 'Hypnotic', 'Safer space', 'Tampere'],
   },
 }
