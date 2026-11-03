@@ -94,6 +94,11 @@ export const T = {
       title: 'Yhteystiedot',
       subtitle: 'Ota yhteyttä palveluihin, DJ-buukkauksiin tai mihin tahansa muuhun liittyen.',
       email: 'Sähköposti', dm: 'Laita meille DM Instagramissa',
+      groups: {
+        bookings: 'Buukkaukset ja kalustovuokraus',
+        artists: 'Artistitiedustelut sekä video- ja valokuvauspalvelut',
+        general: 'Kaikki muu',
+      },
       renting: { pre: 'Vuokraamassa kalustoa? Katso ensin ', link: 'kalustolista', post: '.' },
     },
     notFound: { text: 'Tätä sivua ei ole olemassa.', back: 'Takaisin etusivulle' },
@@ -198,6 +203,11 @@ export const T = {
       title: 'Contact',
       subtitle: 'Get in touch for Services or DJ bookings or any other inquiries.',
       email: 'Email', dm: 'DM us on Instagram',
+      groups: {
+        bookings: 'Booking inquiries and equipment rental',
+        artists: 'Artist inquiries and videographer / photographer services',
+        general: 'Everything else',
+      },
       renting: { pre: 'Renting gear? See the ', link: 'equipment list', post: ' first.' },
     },
     notFound: { text: "This page doesn't exist.", back: 'Back to start' },

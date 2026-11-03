@@ -1,9 +1,9 @@
 import { RENTAL } from '../data/rental'
-import { CONTACT_EMAIL } from '../data/site'
+import { CONTACTS } from '../data/site'
 
 export default function Rental({ lang = 'fi' }) {
   const c = RENTAL[lang]
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(c.quote.emailSubject)}&body=${encodeURIComponent(c.quote.emailBody)}`
+  const mailto = `mailto:${CONTACTS.bookings}?subject=${encodeURIComponent(c.quote.emailSubject)}&body=${encodeURIComponent(c.quote.emailBody)}`
 
   return (
     <div lang={c.lang}>

@@ -244,18 +244,25 @@ main { display: block; min-height: 60vh; }
   white-space: nowrap;
 }
 .theme-landing .ticker { background: var(--bone); color: var(--black); }
+.ticker-row { display: flex; overflow: hidden; }
+.ticker-row + .ticker-row { border-top: 1px solid color-mix(in srgb, currentColor 22%, transparent); }
 .ticker-track {
-  display: inline-flex;
-  animation: ticker 38s linear infinite;
+  display: inline-flex; flex-shrink: 0;
+  animation: ticker-ltr 60s linear infinite;
 }
+.ticker-row:nth-child(2) .ticker-track { animation-duration: 80s; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
 .ticker span {
   font-family: var(--display);
-  font-size: clamp(1.3rem, 2.6vw, 2.2rem);
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
   text-transform: uppercase;
-  padding: 0.35em 0;
+  letter-spacing: 0.02em;
+  padding: 0.3em 0;
+  white-space: nowrap;
 }
-.ticker span::after { content: '✶'; margin: 0 0.9em; font-family: var(--text); font-size: 0.7em; vertical-align: 0.15em; }
-@keyframes ticker { to { transform: translateX(-50%); } }
+.ticker span::after { content: '✶'; margin: 0 1.1em; font-family: var(--text); font-size: 0.65em; vertical-align: 0.15em; }
+/* left to right: start shifted left by one copy, slide to zero */
+@keyframes ticker-ltr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
 /* ---------- Photos and video (natural colour, no tint) ---------- */
 
@@ -619,7 +626,9 @@ a.ticket-buy:hover { background: var(--ticket-ink, var(--black)); color: var(--t
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .ticker-track { flex-wrap: wrap; white-space: normal; }
+  /* the genre strip keeps moving, just slower (hover pauses it) */
+  .ticker-track { animation: ticker-ltr 120s linear infinite !important; }
+  .ticker-row:nth-child(2) .ticker-track { animation-duration: 160s !important; }
 }
 
 /* ---------- Brand logos (blackletter SVGs in public/img/logo) ---------- */
@@ -654,3 +663,15 @@ a.ticket-buy:hover { background: var(--ticket-ink, var(--black)); color: var(--t
 .artist-card-meta { color: var(--ash); margin-top: 6px; font-size: 0.95rem; }
 .artist-card-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 10px; font-weight: 600; font-size: 0.9rem; }
 .artist-card-brand { height: 20px; width: auto; opacity: 0.75; }
+
+/* Contact: who to email for what */
+.contact-list { margin: 0; border-top: 2px solid var(--black); }
+.contact-item {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 8px 32px; align-items: baseline;
+  padding: clamp(18px, 2.5vw, 28px) 0; border-bottom: 2px solid var(--black);
+}
+.contact-item dt { font-stretch: 125%; font-weight: 700; font-size: 0.95rem; }
+.contact-item dd { margin: 0; font-family: var(--display); font-size: clamp(1.4rem, 3.4vw, 2.6rem); line-height: 1.1; overflow-wrap: anywhere; }
+.contact-item dd a { text-decoration: none; }
+.contact-item dd a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.12em; }
+@media (max-width: 700px) { .contact-item { grid-template-columns: 1fr; } }

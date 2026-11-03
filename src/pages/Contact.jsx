@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useI18n } from '../i18n'
-import { CONTACT_EMAIL, SOCIALS } from '../data/site'
+import { CONTACTS, SOCIALS } from '../data/site'
 
 export default function Contact() {
   const { t, paths } = useI18n()
@@ -13,7 +13,14 @@ export default function Contact() {
       </div>
       <section className="paper section">
         <div className="wrap">
-          <a className="contact-mail" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          <dl className="contact-list">
+            {['bookings', 'artists', 'general'].map((k) => (
+              <div className="contact-item" key={k}>
+                <dt>{c.groups[k]}</dt>
+                <dd><a href={`mailto:${CONTACTS[k]}`}>{CONTACTS[k]}</a></dd>
+              </div>
+            ))}
+          </dl>
           <div className="contact-links">
             <a className="btn" href={SOCIALS.instagramHappeninki} target="_blank" rel="noreferrer">Instagram @happeninki</a>
             <a className="btn btn--line" href={SOCIALS.instagramRyym} target="_blank" rel="noreferrer">Instagram @ryym_fi</a>

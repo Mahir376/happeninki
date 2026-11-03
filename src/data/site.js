@@ -3,6 +3,12 @@
 export const SITE_URL = 'https://reivit.fi'
 export const SITE_NAME = 'REIVIT.FI'
 export const CONTACT_EMAIL = 'ryymfi@gmail.com'
+// Who to contact for what (shown on the contact page)
+export const CONTACTS = {
+  bookings: 'santeri.happeninki@gmail.com', // booking inquiries, equipment rental
+  artists: 'riku.happeninki@gmail.com', // artist inquiries, videographer / photographer services
+  general: 'ryymfi@gmail.com', // everything else
+}
 export const SOCIALS = {
   instagramHappeninki: 'https://www.instagram.com/happeninki/',
   instagramRyym: 'https://www.instagram.com/ryym_fi/',

@@ -29,12 +29,18 @@ export function HeroVideo() {
 export function Ticker({ words }) {
   const { t } = useI18n()
   const items = words ?? t.ticker
-  const row = [...items, ...items, ...items]
+  // Each track holds the list repeated, twice over, so the loop is seamless
+  const rowA = Array(4).fill(items).flat()
+  const rowB = Array(4).fill([...items].reverse()).flat()
   return (
     <div className="ticker" aria-hidden="true">
-      <div className="ticker-track">
-        {[...row, ...row].map((w, i) => <span key={i}>{w}</span>)}
-      </div>
+      {[rowA, rowB].map((row, r) => (
+        <div className="ticker-row" key={r}>
+          <div className="ticker-track">
+            {[...row, ...row].map((w, i) => <span key={i}>{w}</span>)}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
