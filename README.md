@@ -42,6 +42,10 @@ canonical, hreflang and structured data (FAQ, Organization, Event), plus `sitema
 - **Team member (add or change):** add someone to the team page, or change an existing person's
   role, photo, genres or link (write their name as it is on the site; empty fields stay the same).
   Custom roles can be written in Finnish and English. A checkbox removes someone.
+- **Website text (change a text):** pick the text from a list (front page headline, concept intros,
+  genre strip, services texts, contact labels and more) and write the new Finnish and/or English
+  version. A checkbox puts the original back. To make another text editable, add it to
+  `scripts/lib/content-fields.mjs` and run `node scripts/build-content-form.mjs`.
 - **Artist (previously showcased):** name, country, genre, brand, which night they played, Instagram
   and SoundCloud links and a photo. Shows on the front page and on the Häppeninki or RYYM page.
 

@@ -3,6 +3,7 @@
 // Edit text here; the page, meta tags, FAQ structured data and sitemap use it.
 
 import { ROUTES } from '../routes.js'
+import { applyContent } from '../content-overrides.js'
 
 export const RENTAL_PATHS = ROUTES.rental
 
@@ -157,6 +158,9 @@ export const RENTAL = {
     ],
   },
 }
+
+// Texts changed with the GitHub "Website text" form
+applyContent(RENTAL, 'rental.')
 
 export function faqLd(page) {
   return {

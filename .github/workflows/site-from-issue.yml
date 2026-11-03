@@ -4,6 +4,7 @@ name: Update site from issue
 #   "Event (upcoming or past)"  -> src/data/events.json (+ poster and photos)
 #   "Artist (previously showcased)" -> src/data/artists.json (+ photo)
 #   "Team member (add or change)" -> src/data/team.json (+ photo)
+#   "Website text (change a text)" -> src/data/content.json
 # This checks the site still builds, commits to main (Vercel then deploys)
 # and replies on the issue. Editing the issue updates the same entry.
 on:
@@ -22,7 +23,7 @@ jobs:
   update:
     # Only people with write access to the repo can publish
     if: >-
-      (contains(github.event.issue.labels.*.name, 'new-event') || contains(github.event.issue.labels.*.name, 'new-artist') || contains(github.event.issue.labels.*.name, 'team')) &&
+      (contains(github.event.issue.labels.*.name, 'new-event') || contains(github.event.issue.labels.*.name, 'new-artist') || contains(github.event.issue.labels.*.name, 'team') || contains(github.event.issue.labels.*.name, 'website-text')) &&
       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
     runs-on: ubuntu-latest
     steps:
@@ -42,8 +43,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IS_ARTIST: ${{ contains(github.event.issue.labels.*.name, 'new-artist') }}
           IS_TEAM: ${{ contains(github.event.issue.labels.*.name, 'team') }}
+          IS_TEXT: ${{ contains(github.event.issue.labels.*.name, 'website-text') }}
         run: |
-          if [ "$IS_TEAM" = "true" ]; then node scripts/team-from-issue.mjs
+          if [ "$IS_TEXT" = "true" ]; then node scripts/content-from-issue.mjs
+          elif [ "$IS_TEAM" = "true" ]; then node scripts/team-from-issue.mjs
           elif [ "$IS_ARTIST" = "true" ]; then node scripts/artist-from-issue.mjs
           else node scripts/event-from-issue.mjs; fi
 
@@ -60,14 +63,15 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           IS_ARTIST: ${{ contains(github.event.issue.labels.*.name, 'new-artist') }}
           IS_TEAM: ${{ contains(github.event.issue.labels.*.name, 'team') }}
+          IS_TEXT: ${{ contains(github.event.issue.labels.*.name, 'website-text') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/events.json src/data/artists.json src/data/team.json
+          git add src/data/events.json src/data/artists.json src/data/team.json src/data/content.json
           for d in public/img/posters public/img/events public/img/artists public/img/team; do [ -d "$d" ] && git add "$d"; done
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           TITLE=$(node -p "require('./.issue-result.json').title")
-          KIND=$([ "$IS_TEAM" = "true" ] && echo "team member" || ([ "$IS_ARTIST" = "true" ] && echo "artist" || echo "event"))
+          KIND=$([ "$IS_TEXT" = "true" ] && echo "text" || ([ "$IS_TEAM" = "true" ] && echo "team member" || ([ "$IS_ARTIST" = "true" ] && echo "artist" || echo "event")))
           git commit -m "Update ${KIND}: ${TITLE} (#${ISSUE_NUMBER})"
           git pull --rebase origin main
           git push origin HEAD:main

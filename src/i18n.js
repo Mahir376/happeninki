@@ -2,6 +2,7 @@
 // All UI text for both languages is in this file. Event and rental texts
 // are in src/data/events.js and src/data/rental.js.
 import { useLocation } from 'react-router-dom'
+import { applyContent } from './content-overrides'
 
 import { ROUTES, langOf, routeKeyOf } from './routes.js'
 
@@ -233,3 +234,6 @@ export const T = {
     ticker: ['House', 'Techno', 'Hard techno', 'Harder styles', 'Safer space', 'Tampere'],
   },
 }
+
+// Texts changed with the GitHub "Website text" form
+applyContent(T)
