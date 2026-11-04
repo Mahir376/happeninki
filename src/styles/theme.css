@@ -254,7 +254,7 @@ main { display: block; min-height: 60vh; }
 .ticker:hover .ticker-track { animation-play-state: paused; }
 .ticker span {
   font-family: var(--display);
-  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+  font-size: clamp(1.19rem, 1.875vw, 1.5625rem); /* 25% larger than before */
   text-transform: uppercase;
   letter-spacing: 0.02em;
   padding: 0.3em 0;

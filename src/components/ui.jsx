@@ -31,10 +31,9 @@ export function Ticker({ words }) {
   const items = words ?? t.ticker
   // Each track holds the list repeated, twice over, so the loop is seamless
   const rowA = Array(4).fill(items).flat()
-  const rowB = Array(4).fill([...items].reverse()).flat()
   return (
     <div className="ticker" aria-hidden="true">
-      {[rowA, rowB].map((row, r) => (
+      {[rowA].map((row, r) => (
         <div className="ticker-row" key={r}>
           <div className="ticker-track">
             {[...row, ...row].map((w, i) => <span key={i}>{w}</span>)}
