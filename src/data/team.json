@@ -12,8 +12,12 @@
     "name": "Riku",
     "role": "dj",
     "image": "/img/residents/r2.jpg",
-    "detail": "Hardgroove / Hypnotic",
-    "link": ""
+    "detail": "Techno",
+    "link": "",
+    "roleText": {
+      "fi": "Head of Marketing, Curator and resident DJ",
+      "en": "Head of Marketing, Curator and resident DJ"
+    }
   },
   {
     "id": "tiskimikko",
