@@ -5,7 +5,11 @@
     "role": "dj",
     "image": "/img/residents/r1.jpg",
     "detail": "Industrial / Hard Techno / Hardcore",
-    "link": ""
+    "link": "",
+    "roleText": {
+      "fi": "Design Director/Technical Director and Resident DJ",
+      "en": "Design Director/Technical Director and Resident DJ"
+    }
   },
   {
     "id": "riku",
