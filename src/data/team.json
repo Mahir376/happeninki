@@ -38,5 +38,17 @@
     "image": "/img/team/chris.jpg",
     "detail": "",
     "link": ""
+  },
+  {
+    "id": "patrik-matikainen",
+    "name": "Patrik Matikainen",
+    "role": "",
+    "image": "",
+    "detail": "",
+    "link": "",
+    "roleText": {
+      "fi": "CEO",
+      "en": "CEO"
+    }
   }
 ]
