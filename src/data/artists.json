@@ -83,5 +83,18 @@
     "soundcloud": "https://soundcloud.com/karashnikovmusic",
     "playedAt": "Cyber Rave Cage",
     "issue": 2
+  },
+  {
+    "id": "kuss",
+    "name": "KUSS",
+    "from": "FR",
+    "genre": "Techno",
+    "concept": "happeninki",
+    "image": "/img/artists/kuss.jpg",
+    "position": "",
+    "instagram": "https://www.instagram.com/k.u.s.s/",
+    "soundcloud": "",
+    "playedAt": "Project Blacksite 2.0",
+    "issue": 20
   }
 ]
